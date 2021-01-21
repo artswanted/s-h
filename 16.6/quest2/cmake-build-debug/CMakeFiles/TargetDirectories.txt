@@ -1,0 +1,3 @@
+C:/Users/artsw/CLionProjects/21.12/quest2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/artsw/CLionProjects/21.12/quest2/cmake-build-debug/CMakeFiles/quest2.dir
+C:/Users/artsw/CLionProjects/21.12/quest2/cmake-build-debug/CMakeFiles/edit_cache.dir
