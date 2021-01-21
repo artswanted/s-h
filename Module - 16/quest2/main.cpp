@@ -23,8 +23,9 @@ int main() {
     }
 
     for (int i = 0; i < vecSum.size(); i++){
+        std::cout << vecPrices[vecSum[i]-1];
         result += vecPrices[vecSum[i]-1];
-        boughtList.push_back(vecList[i]);
+        boughtList.push_back(vecList[vecSum[i]-1]);
     }
 
     std::cout << "Your total price for items are " << result << "RUB" << std::endl << "Your items list:" << std::endl;
