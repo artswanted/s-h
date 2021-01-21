@@ -1,0 +1,3 @@
+C:/Users/nosf/CLionProjects/yourself-isolation/cmake-build-debug/CMakeFiles/yourself_isolation.dir
+C:/Users/nosf/CLionProjects/yourself-isolation/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/nosf/CLionProjects/yourself-isolation/cmake-build-debug/CMakeFiles/rebuild_cache.dir
