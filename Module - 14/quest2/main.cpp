@@ -27,7 +27,8 @@ int main() {
                 std::cout << "Incorrect!";
             }
         } while (true);
-        if (reset) break;
+
+        if (exit) break;
         else {
             std::cout << "Write line number (1-3): ";
             do {
