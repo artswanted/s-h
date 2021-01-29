@@ -1,31 +1,30 @@
 #include <iostream>
 #include <string>
-#include <cassert>
-#define _debug;
 using namespace std;
 
 string encryptCaeser(string iMessage, int iFormula){
     string encMessage;
-    char letter;
-    cout << "+ or - ?";
-    for (int i = 0; i < iMessage.size(); i++){
-        letter = iMessage[i]-iFormula;
-        encMessage[i] = letter;
-    }
+    char letter, solution;
+    cout << "+ or - ?" << endl;
+    do {
+        cin >> solution;
+        if (solution == '+') {
+            for (int i = 0; i < iMessage.size(); i++){
+                letter = iMessage[i] + iFormula;
+                encMessage += letter;
+            }
+            break;
+        } else if (solution == '-'){
+            for (int i = 0; i < iMessage.size(); i++){
+                letter = iMessage[i] - iFormula;
+                encMessage += letter;
+            }
+            break;
+        } else cout << "Incorrect." << endl;
+    } while (true);
+
     return encMessage;
 }
-/*
-string decryptCaeser(string iMessage, int iFormula){
-    string decMessage;
-    char letter, solution;
-    cout << "+ or - ?";
-
-    for (int i = 0; i < iMessage.size(); i++){
-        letter = iMessage[i]-iFormula;
-        decMessage[i] = letter;
-    }
-    return decMessage;
-}*/
 
 int main() {
     string iSrcMessage;
@@ -33,29 +32,11 @@ int main() {
     std::cout << "Welcome to Caesar Encryptor." << std::endl;
     cout << "Enter your message: " << endl;
     getline(cin, iSrcMessage);
-/*
-    cout << "Enter your choice." << endl << "1. Encrypt" << endl << "2. Decrypt" << endl;
-    do {
-        cin >> iChoice;
-        if (iChoice == 1 || iChoice == 2) break;
-        else cout << "Incorrect!";
-    } while (true);
 
-#ifdef _debug
-    assert(iChoice == 1 || iChoice == 2);
-#endif
-*/
     cout << "Write your enc/dec number:" << endl;
     cin >> iFormula;
     iSrcMessage = encryptCaeser(iSrcMessage, iFormula);
-/*
-    if (iChoice == 1){
-        iSrcMessage = encryptCaeser(iSrcMessage, iFormula);
-    }
-    else {
-        iSrcMessage = decryptCaeser(iSrcMessage, iFormula);
-    }
-    */
 
+    cout << iSrcMessage;
     return 0;
 }
