@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/nosf/Documents/GitHub/skillbox-homework/Module - 14/quest2/main.cpp
+iostream
+-
+vector
+-
+string
+-
+
