@@ -1,0 +1,3 @@
+C:/Users/nosf/Documents/GitHub/skillbox-homework/Module - 14/quest1/cmake-build-debug/CMakeFiles/quest1.dir
+C:/Users/nosf/Documents/GitHub/skillbox-homework/Module - 14/quest1/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/nosf/Documents/GitHub/skillbox-homework/Module - 14/quest1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
