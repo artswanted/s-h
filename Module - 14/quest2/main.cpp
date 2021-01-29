@@ -13,7 +13,7 @@ int main() {
     bool exit = false, reset = false;
     int line, column;
     do {
-        std::cout << "Write X or 0 for play or Q for exit or R for reset: ";
+        std::cout << "Write X or 0 for play or Q for exit or R for reset: " << std::endl;
         do {
             std::cin >> choice;
             if (choice == 'X' || choice == '0') break;
@@ -24,24 +24,24 @@ int main() {
                 reset = true;
                 break;
             } else {
-                std::cout << "Incorrect!";
+                std::cout << "Incorrect!" << std::endl;
             }
         } while (true);
 
         if (exit) break;
-        else {
-            std::cout << "Write line number (1-3): ";
+        else if (!reset) {
+            std::cout << "Write line number (1-3): " << std::endl;
             do {
                 std::cin >> line;
                 if (line >= 1 && line <= 3) break;
-                else std::cout << "Incorrect!";
+                else std::cout << "Incorrect!" << std::endl;
             } while (true);
 
-            std::cout << "Write column in line (1-3): ";
+            std::cout << "Write column in line (1-3): " << std::endl;
             do {
                 std::cin >> column;
                 if (column >= 1 && column <= 3) break;
-                else std::cout << "Incorrect!";
+                else std::cout << "Incorrect!" << std::endl;
             } while (true);
 
             xoVec[line][column] = choice;
@@ -57,6 +57,6 @@ int main() {
         }
     } while (true);
 
-    std::cout << "Have a nice day!";
+    std::cout << "Have a nice day!" << std::endl;
     return 0;
 }
