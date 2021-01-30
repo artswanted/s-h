@@ -5,21 +5,43 @@ bool iValidatorEmail (std::string pKEmail){
     bool iCorrect = true;
     int iValid = 0;
     bool iMiddle = false;
-    int iDogCounter, iDotCounter;
+    bool checkWord = false;
     std::vector<char> iBadSymbol {'!','#', '$', '%', '&', '\'', '*', '+', '-', '/', '=',
                                  '?', '^', '_', '`', '{', '|', '}', '~'};
     std::vector<char> corSymbol {'@', '.'};
     for (int i = 0; i < pKEmail.length(); i++){
+        //std::cout << pKEmail[i] << std::endl;
+
         if (pKEmail[pKEmail.size()-1] == corSymbol[1] &&
             pKEmail[0] == corSymbol[1]) {
             iCorrect = false;
             break;
         }
+
+        if ((pKEmail[i] >= '0' && pKEmail[i] <= '9') ||
+            (pKEmail[i] >= 'A' && pKEmail[i] <= 'Z') ||
+            (pKEmail[i] >= 'a' && pKEmail[i] <= 'z')){
+            //wtf?
+        } else {
+            for (int j = 0; j < iBadSymbol.size(); j++){
+                if (pKEmail[i] == iBadSymbol[j] ||
+                    pKEmail[i] == corSymbol[0] ||
+                    pKEmail[i] == corSymbol[1]) {
+                    break;
+                } else {
+                    checkWord = true;
+                }
+            }
+            if (checkWord) {
+                iCorrect = false;
+                break;
+            };
+        }
+
         if (pKEmail[i] == corSymbol[1] && pKEmail[i+1] == corSymbol[1]){
             iCorrect = false;
             break;
         }
-
 
         if (!iMiddle && pKEmail[i] == corSymbol[0]){
             iMiddle = true;
@@ -35,9 +57,10 @@ bool iValidatorEmail (std::string pKEmail){
                     break;
                 }
             }
-        } else {
+        } else if (!iMiddle && pKEmail.size()-1 == i){
             iCorrect = false;
         }
+
         iValid++;
         if (!iCorrect) break;
     }
