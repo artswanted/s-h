@@ -49,7 +49,7 @@ bool iValidatorEmail (std::string pKEmail){
                 iCorrect = false;
             }
         } else if (iMiddle && pKEmail[i] == corSymbol[0]) {
-            iCorrect == false;
+            iCorrect = false;
         } else if (iMiddle){
             for (int j = 0; j < iBadSymbol.size(); j++){
                 if (pKEmail[i] == iBadSymbol[j]) {
