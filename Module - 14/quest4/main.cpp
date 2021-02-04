@@ -6,9 +6,11 @@ bool iChecker (std::string ip){
     int number = 0;
     int dot = 0;
     for (int i = 0; i < ip.size(); i++){
-        if (ip[i] < '0' || ip[i] > '9'){
-            result = false;
-            break;
+        if (ip[i] < '0' || ip[i] > '9') {
+            if (ip[i] != '.') {
+                result = false;
+                break;
+            }
         }
 
         if (ip[i] != '.' && temp.size() < 3) {
@@ -23,6 +25,7 @@ bool iChecker (std::string ip){
             else number = temp[0] - '0';
             std::cout << number;
             if (number > 255 || number < 0) {
+                //std::cout << "break?? " << number << std::endl;
                 result = false;
                 break;
             }
@@ -33,6 +36,8 @@ bool iChecker (std::string ip){
             result = false;
             break;
         }
+        //std::cout << temp << std::endl;
+
     }
     if (dot != 3) result = false;
     return result;
