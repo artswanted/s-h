@@ -23,7 +23,7 @@ bool iChecker (std::string ip){
                 number = ((temp[0] - '0') * 10) + (temp[1] - '0');
             }
             else number = temp[0] - '0';
-            std::cout << number;
+            //std::cout << number;
             if (number > 255 || number < 0) {
                 //std::cout << "break?? " << number << std::endl;
                 result = false;
