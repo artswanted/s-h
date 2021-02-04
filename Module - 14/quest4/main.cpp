@@ -3,34 +3,43 @@
 bool iChecker (std::string ip){
     bool result = true;
     std::string temp;
-    int number;
+    int number = 0;
+    int dot = 0;
     for (int i = 0; i < ip.size(); i++){
-        if (ip[i] != '.' && temp.size() < 3) {
-            temp += ip[i];
-        } else if (ip[i] == '.' && temp.size() > 0){
-            //
-            if (temp.size() == 3) number = (temp[0] * 100) + (temp[1] * 10) + temp[2];
-            else if (temp.size() == 2) number = (temp[0] * 10) + temp[1];
-            else number = temp[1];
-            //
-            if (number > 255 || number < 0) {
-                result = false;
-                break;
-            }
-        } else {
+        if (ip[i] < '0' || ip[i] > '9'){
             result = false;
             break;
         }
 
-
+        if (ip[i] != '.' && temp.size() < 3) {
+            temp += ip[i];
+        } else if (ip[i] == '.' && temp.size() > 0){
+            if (temp.size() == 3){
+                number = ((temp[0] - '0') * 100) + ((temp[1] - '0') * 10) + (temp[2] - '0');
+            }
+            else if (temp.size() == 2) {
+                number = ((temp[0] - '0') * 10) + (temp[1] - '0');
+            }
+            else number = temp[0] - '0';
+            std::cout << number;
+            if (number > 255 || number < 0) {
+                result = false;
+                break;
+            }
+            temp.clear();
+            number = 0;
+            dot++;
+        } else {
+            result = false;
+            break;
+        }
     }
-
+    if (dot != 3) result = false;
     return result;
 }
 
 int main() {
     std::string ip;
-
     std::cout << "Write IP: " << std::endl;
     std::cin >> ip;
     std::cout << (iChecker(ip) ? "Yes" : "No");
