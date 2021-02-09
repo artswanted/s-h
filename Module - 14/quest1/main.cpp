@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
+/*
 string encryptCaeser(string iMessage, int iFormula){
     string encMessage;
     char letter, solution;
@@ -34,6 +34,18 @@ string encryptCaeser(string iMessage, int iFormula){
     } while (true);
 
     return encMessage;
+}*/
+char iChangeSymbol(char iSymbol, int iFormula){
+    
+    return iSymbol;
+}
+
+string encryptCaeser(string iMessage, int iFormula){
+    string encMessage;
+    for (int i = 0; i < iMessage.size(); i++) {
+        encMessage += iChangeSymbol(iMessage[i], iFormula);
+    }
+    return iMessage;
 }
 
 int main() {
