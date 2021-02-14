@@ -46,6 +46,7 @@ int main() {
     getline(cin, iSrcMessage);
 
     cout << "Write your enc/dec number:" << endl;
+    cout << "(template: 4 or -3 or -7)" << endl;
     cin >> iFormula;
     iSrcMessage = encryptCaeser(iSrcMessage, iFormula);
 
