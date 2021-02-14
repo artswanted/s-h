@@ -36,16 +36,45 @@ string encryptCaeser(string iMessage, int iFormula){
     return encMessage;
 }*/
 char iChangeSymbol(char iSymbol, int iFormula){
-    
-    return iSymbol;
+    if ((iSymbol < 'A' && iSymbol > 'Z') && (iSymbol < 'a' && iSymbol > 'z')) {
+        cout << "bug 1";
+        return iSymbol;
+    }
+
+    if(iSymbol > 'A' && iSymbol < 'Z'){
+        if (iSymbol + iFormula > 'Z' || iSymbol + iFormula < 'A' ){
+            if (iSymbol + iFormula < 'A'){
+                return 'Z' - (iFormula - (iSymbol - 'A'));
+            } else if (iSymbol + iFormula > 'Z'){
+                return 'A' + (iSymbol + iFormula - 'Z');
+            }
+        } else {
+            return iSymbol + iFormula;
+        }
+    } else if (iSymbol < 'a' && iSymbol > 'z'){
+        cout << "bug 2";
+        if (iSymbol + iFormula > 'z' || iSymbol + iFormula < 'a' ){
+            if (iSymbol + iFormula < 'a'){
+                return 'z' - (iFormula - (iSymbol - 'a'));
+            } else if (iSymbol + iFormula > 'Z'){
+                return 'a' + (iSymbol + iFormula - 'z');
+            }
+        } else {
+            cout << "bug 3";
+            return iSymbol + iFormula;
+        }
+    }
 }
 
 string encryptCaeser(string iMessage, int iFormula){
     string encMessage;
+    char temp;
     for (int i = 0; i < iMessage.size(); i++) {
-        encMessage += iChangeSymbol(iMessage[i], iFormula);
+        temp = iChangeSymbol(iMessage[i], iFormula);
+        encMessage += temp;
+        cout << iChangeSymbol(iMessage[i], iFormula);
     }
-    return iMessage;
+    return encMessage;
 }
 
 int main() {

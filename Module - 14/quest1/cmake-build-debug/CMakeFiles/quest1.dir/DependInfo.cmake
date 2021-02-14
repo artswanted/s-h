@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "F:/skillbox-homework/Module - 14/quest1/main.cpp" "F:/skillbox-homework/Module - 14/quest1/cmake-build-debug/CMakeFiles/quest1.dir/main.cpp.obj"
+  "C:/Users/nosf/Documents/GitHub/skillbox-homework/Module - 14/quest1/main.cpp" "C:/Users/nosf/Documents/GitHub/skillbox-homework/Module - 14/quest1/cmake-build-debug/CMakeFiles/quest1.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "MSVC")
 
