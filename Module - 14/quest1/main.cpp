@@ -1,40 +1,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-/*
-string encryptCaeser(string iMessage, int iFormula){
-    string encMessage;
-    char letter, solution;
-    cout << "White + or -" << std::endl; //here you can choice way
-    do {
-        cin >> solution;
-        if (solution == '+') {
-            for (int i = 0; i < iMessage.size(); i++){
-                if ((iMessage[i] > 'a' && iMessage[i] > 'z') ||
-                    (iMessage[i] > 'A' && iMessage[i] > 'Z')){
-                    letter = iMessage[i] + iFormula;
-                    encMessage += letter;
-                } else {
-                    encMessage += iMessage[i];
-                }
-            }
-            break;
-        } else if (solution == '-'){
-            for (int i = 0; i < iMessage.size(); i++){
-                if ((iMessage[i] > 'a' && iMessage[i] > 'z') ||
-                    (iMessage[i] > 'A' && iMessage[i] > 'Z')) {
-                    letter = iMessage[i] - iFormula;
-                    encMessage += letter;
-                } else {
-                    encMessage += iMessage[i];
-                }
-            }
-            break;
-        } else cout << "Incorrect." << endl;
-    } while (true);
 
-    return encMessage;
-}*/
 char iChangeSymbol(char iSymbol, int iFormula){
     if ((iSymbol < 'A' && iSymbol > 'Z') && (iSymbol < 'a' && iSymbol > 'z')) {
         cout << "bug 1";
