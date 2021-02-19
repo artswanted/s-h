@@ -9,6 +9,8 @@ char iChangeSymbol(char iSymbol, int iFormula){
                 return 'Z' - (iFormula - (iSymbol - 'A')+1);
             } else if (iSymbol + iFormula > 'Z'){
                 return 'A' + ((iSymbol + iFormula - 'Z')-1);
+            } else {
+                return iSymbol;
             }
         } else {
             return iSymbol + iFormula;
@@ -16,9 +18,12 @@ char iChangeSymbol(char iSymbol, int iFormula){
     } else if (iSymbol >= 'a' && iSymbol <= 'z'){
         if (iSymbol + iFormula > 'z' || iSymbol + iFormula < 'a' ){
             if (iSymbol + iFormula < 'a'){
-                return 'z' - (iFormula - (iSymbol - 'a')+1);
+                //return 'z' - (iFormula - (iSymbol - 'a')+1);
+                return  iSymbol += iFormula + 'z' - 'a' + 1;
             } else if (iSymbol + iFormula > 'z'){
                 return 'a' + ((iSymbol + iFormula - 'z')-1);
+            } else {
+                return iSymbol;
             }
         } else {
             return iSymbol + iFormula;
@@ -30,10 +35,10 @@ char iChangeSymbol(char iSymbol, int iFormula){
 
 string encryptCaeser(string iMessage, int iFormula){
     string encMessage;
-    char temp;
+    //char temp;
     for (int i = 0; i < iMessage.size(); i++) {
-        temp = iChangeSymbol(iMessage[i], iFormula);
-        encMessage += temp;
+        encMessage += iChangeSymbol(iMessage[i], iFormula);
+        //encMessage += temp;
     }
     return encMessage;
 }
