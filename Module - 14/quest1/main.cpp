@@ -2,48 +2,42 @@
 #include <string>
 using namespace std;
 
-char iChangeSymbol(char iSymbol, int iFormula){
-    if(iSymbol >= 'A' && iSymbol <= 'Z'){
-        if (iSymbol + iFormula > 'Z' || iSymbol + iFormula < 'A' ){
-            if (iSymbol + iFormula < 'A'){
-                return 'Z' - (iFormula - (iSymbol - 'A')+1);
-            } else if (iSymbol + iFormula > 'Z'){
-                return 'A' + ((iSymbol + iFormula - 'Z')-1);
-            } else {
-                return iSymbol;
-            }
-        } else {
-            return iSymbol + iFormula;
-        }
-    } else if (iSymbol >= 'a' && iSymbol <= 'z'){
-        if (iSymbol + iFormula > 'z' || iSymbol + iFormula < 'a' ){
-            if (iSymbol + iFormula < 'a'){
-                //return 'z' - (iFormula - (iSymbol - 'a')+1);
-                return  iSymbol += iFormula + 'z' - 'a' + 1;
-            } else if (iSymbol + iFormula > 'z'){
-                return 'a' + ((iSymbol + iFormula - 'z')-1);
-            } else {
-                return iSymbol;
-            }
-        } else {
-            return iSymbol + iFormula;
-        }
+char iChangeSymbol(char cSymbol, int iFormula){
+    char cFirstSymbol;
+    char cLastSymbol;
+    if (cSymbol >= 'A' && cSymbol <= 'Z') {
+        cFirstSymbol = 'A';
+        cLastSymbol = 'Z';
+    } else if (cSymbol >= 'a' && cSymbol <= 'z') {
+        cFirstSymbol = 'a';
+        cLastSymbol = 'z';
     } else {
-        return iSymbol;
+        return cSymbol;
     }
+
+    int iMovedSymbol = cSymbol + iFormula % 26;
+
+    if (iMovedSymbol > cLastSymbol) {
+        cSymbol = cFirstSymbol + iMovedSymbol % cLastSymbol - 1;
+    } else if (iMovedSymbol < cFirstSymbol) {
+        cSymbol = cLastSymbol - cLastSymbol % iMovedSymbol + 1;
+    } else {
+        cSymbol += cSymbol % 26;
+    }
+    return cSymbol;
 }
 
-string encryptCaeser(string iMessage, int iFormula){
+string encryptCaeser(string sMessage, int iFormula){
     string encMessage;
-    for (int i = 0; i < iMessage.size(); i++) {
-        encMessage += iChangeSymbol(iMessage[i], iFormula);
+    for (int i = 0; i < sMessage.length(); i++) {
+        encMessage += iChangeSymbol(sMessage[i], iFormula);
     }
     return encMessage;
 }
 
 string decryptCaeser(string iMessage, int iFormula){
     string decMessage;
-    for (int i = 0; i < iMessage.size(); i++) {
+    for (int i = 0; i < iMessage.length(); i++) {
         decMessage += iChangeSymbol(iMessage[i], iFormula);
     }
     return decMessage;
@@ -61,17 +55,19 @@ int main() {
 
 
         if (iCommand == 1) {
-            std::cout << std::endl<< "Encrypt: ";
-            std::cout << "Please, input text: ";
-            getline(std::cin, sMessage);
-            std::cout << "Please, input shift: ";
+            std::cout << std::endl << "Encrypt!" << std::endl;
+            std::cout << "Please, input text:";
+            std::cin.ignore(32767, '\n');
+            std::getline(std::cin, sMessage);
+            std::cout << "Please, input shift:";
             std::cin >> iShift;
             std::cout << "Encrypted text: " <<  encryptCaeser(sMessage, iShift) << std::endl;
 
         } else if (iCommand == 2) {
-            std::cout << std::endl << "Decrypt: ";
-            std::cout << "Please, input text: ";
-            std::getline(std::cin, sMessage);
+            std::cout << std::endl << "Decrypt!" << std::endl;
+            std::cout << "Please, input text:";
+            std::cin.ignore(32767, '\n');
+            std::getline(std::cin,sMessage);
             std::cout << "Please, input shift: ";
             std::cin >> iShift;
             std::cout << "Encrypted text: " << decryptCaeser(sMessage, iShift) << std::endl;
