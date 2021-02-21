@@ -44,17 +44,33 @@ string encryptCaeser(string iMessage, int iFormula){
 }
 
 int main() {
-    string iSrcMessage;
-    int iFormula;
-    std::cout << "Welcome to Caesar Encryptor." << std::endl;
-    cout << "Enter your message: " << endl;
-    getline(cin, iSrcMessage);
+    std::string sMessage;
+    int shift;
+    int command;
+    do {
+        std::cout << "Press 1 to encrypt." << std::endl;
+        std::cout << "Press 2 to decrypt." << std::endl;
+        std::cout << "Press 0 to quit." << std::endl;
+        std::cin >> command;
 
-    cout << "Write your enc/dec number:" << endl;
-    cout << "(template: 4 or -3 or -7)" << endl;
-    cin >> iFormula;
-    iSrcMessage = encryptCaeser(iSrcMessage, iFormula);
 
-    cout << iSrcMessage;
-    return 0;
+        if (command == 1) {
+            std::cout << std::endl<< "Encrypt: ";
+            std::cout << "Please, input text: ";
+            getline(std::cin, sMessage);
+            std::cout << "Please, input shift: ";
+            std::cin >> shift;
+            std::cout << "Encrypted text: " <<  encryptCaeser(sMessage, shift) << std::endl;
+
+        } else if (command == 2) {
+            std::cout << std::endl << "Decrypt: ";
+            std::cout << "Please, input text: ";
+            std::getline(std::cin, sMessage);
+            std::cout << "Please, input shift: ";
+            std::cin >> shift;
+            std::cout << "Encrypted text: " << decryptCaeser(sMessage, shift) << std::endl;
+        }
+
+    } while (command != 0);
+
 }
