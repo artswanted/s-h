@@ -46,15 +46,15 @@ string encryptCaeser(string iMessage, int iFormula){
 int main() {
     std::string sMessage;
     int shift;
-    int command;
+    int iCommand;
     do {
         std::cout << "Press 1 to encrypt." << std::endl;
         std::cout << "Press 2 to decrypt." << std::endl;
         std::cout << "Press 0 to quit." << std::endl;
-        std::cin >> command;
+        std::cin >> iCommand;
 
 
-        if (command == 1) {
+        if (iCommand == 1) {
             std::cout << std::endl<< "Encrypt: ";
             std::cout << "Please, input text: ";
             getline(std::cin, sMessage);
@@ -62,7 +62,7 @@ int main() {
             std::cin >> shift;
             std::cout << "Encrypted text: " <<  encryptCaeser(sMessage, shift) << std::endl;
 
-        } else if (command == 2) {
+        } else if (iCommand == 2) {
             std::cout << std::endl << "Decrypt: ";
             std::cout << "Please, input text: ";
             std::getline(std::cin, sMessage);
@@ -71,6 +71,6 @@ int main() {
             std::cout << "Encrypted text: " << decryptCaeser(sMessage, shift) << std::endl;
         }
 
-    } while (command != 0);
+    } while (iCommand != 0);
 
 }
