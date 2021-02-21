@@ -41,9 +41,17 @@ string encryptCaeser(string iMessage, int iFormula){
     return encMessage;
 }
 
+string decryptCaeser(string iMessage, int iFormula){
+    string decMessage;
+    for (int i = 0; i < iMessage.size(); i++) {
+        decMessage += iChangeSymbol(iMessage[i], iFormula);
+    }
+    return decMessage;
+}
+
 int main() {
     std::string sMessage;
-    int shift;
+    int iShift;
     int iCommand;
     do {
         std::cout << "Press 1 to encrypt." << std::endl;
@@ -57,16 +65,16 @@ int main() {
             std::cout << "Please, input text: ";
             getline(std::cin, sMessage);
             std::cout << "Please, input shift: ";
-            std::cin >> shift;
-            std::cout << "Encrypted text: " <<  encryptCaeser(sMessage, shift) << std::endl;
+            std::cin >> iShift;
+            std::cout << "Encrypted text: " <<  encryptCaeser(sMessage, iShift) << std::endl;
 
         } else if (iCommand == 2) {
             std::cout << std::endl << "Decrypt: ";
             std::cout << "Please, input text: ";
             std::getline(std::cin, sMessage);
             std::cout << "Please, input shift: ";
-            std::cin >> shift;
-            std::cout << "Encrypted text: " << decryptCaeser(sMessage, shift) << std::endl;
+            std::cin >> iShift;
+            std::cout << "Encrypted text: " << decryptCaeser(sMessage, iShift) << std::endl;
         }
 
     } while (iCommand != 0);
