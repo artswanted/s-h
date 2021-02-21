@@ -35,10 +35,8 @@ char iChangeSymbol(char iSymbol, int iFormula){
 
 string encryptCaeser(string iMessage, int iFormula){
     string encMessage;
-    //char temp;
     for (int i = 0; i < iMessage.size(); i++) {
         encMessage += iChangeSymbol(iMessage[i], iFormula);
-        //encMessage += temp;
     }
     return encMessage;
 }
