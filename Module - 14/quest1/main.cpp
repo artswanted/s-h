@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-char iChangeSymbol(char cSymbol, int iFormula){
+void iChangeSymbol (char &cSymbol, int iFormula) {
     char cFirstSymbol;
     char cLastSymbol;
     if (cSymbol >= 'A' && cSymbol <= 'Z') {
@@ -12,7 +12,7 @@ char iChangeSymbol(char cSymbol, int iFormula){
         cFirstSymbol = 'a';
         cLastSymbol = 'z';
     } else {
-        return cSymbol;
+        return;
     }
 
     int iMovedSymbol = cSymbol + iFormula % 26;
@@ -20,27 +20,26 @@ char iChangeSymbol(char cSymbol, int iFormula){
     if (iMovedSymbol > cLastSymbol) {
         cSymbol = cFirstSymbol + iMovedSymbol % cLastSymbol - 1;
     } else if (iMovedSymbol < cFirstSymbol) {
-        cSymbol = cLastSymbol - cLastSymbol % iMovedSymbol + 1;
+        cSymbol = cLastSymbol - cFirstSymbol % iMovedSymbol + 1;
     } else {
-        cSymbol += cSymbol % 26;
+        cSymbol += iFormula % 26;
     }
-    return cSymbol;
 }
 
 string encryptCaeser(string sMessage, int iFormula){
     string encMessage;
     for (int i = 0; i < sMessage.length(); i++) {
-        encMessage += iChangeSymbol(sMessage[i], iFormula);
+        iChangeSymbol(sMessage[i], iFormula);
     }
-    return encMessage;
+    return sMessage;
 }
 
-string decryptCaeser(string iMessage, int iFormula){
+string decryptCaeser(string sMessage, int iFormula){
     string decMessage;
-    for (int i = 0; i < iMessage.length(); i++) {
-        decMessage += iChangeSymbol(iMessage[i], iFormula);
+    for (int i = 0; i < sMessage.length(); i++) {
+        iChangeSymbol(sMessage[i], iFormula);
     }
-    return decMessage;
+    return sMessage;
 }
 
 int main() {
