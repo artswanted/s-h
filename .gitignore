@@ -337,5 +337,3 @@ ASALocalRun/
 healthchecksdb
 
 *.tlog
-Dragonica_Exe/*.exe
-SRCEUROPEV3/cosmos_src/*.lib
