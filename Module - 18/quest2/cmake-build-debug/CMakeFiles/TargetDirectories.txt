@@ -1,0 +1,3 @@
+F:/skillbox-homework/Module - 18/quest2/cmake-build-debug/CMakeFiles/18_2.dir
+F:/skillbox-homework/Module - 18/quest2/cmake-build-debug/CMakeFiles/edit_cache.dir
+F:/skillbox-homework/Module - 18/quest2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
