@@ -11,7 +11,19 @@ int main() {
     int max = vec[0];
     bool newSum = false;
     bool haveNotI = true;
-    for (int i = 0; i < vec.size() - 1; ++i)
+
+    for(int i = 0; i < vec.size() - 1; ++i){
+        int tmp = vec[i];
+        for(int j = i + 1; j < vec.size(); ++j){
+            tmp += vec[j];
+            if(max < tmp){
+                max = vec[i] + vec[j];
+                posI = i;
+                posJ = j;
+            }
+        }
+    }
+    /*for (int i = 0; i < vec.size() - 1; ++i)
     {
         if (newSum || vec[i] >= 0)
         {
@@ -46,7 +58,7 @@ int main() {
         else{
             curSum = 0;
         }
-    }
+    }*/
     std::cout << "max = " << max << std::endl;
     std::cout << "i = " << posI << std::endl;
     std::cout << "j = " << posJ << std::endl;
