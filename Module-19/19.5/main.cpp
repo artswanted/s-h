@@ -1,110 +1,177 @@
 #include <iostream>
+#include <sstream>
 
-int iStatus = 0;
 
-enum eFlap {
-    POWER_HOUSE = 1,
-    SOCKET = 2,
-    LIGHT_INSIDE = 4,
-    LIGHT_GARDEN = 8,
+int automatics = 0;
+
+
+enum Automatic
+{
+    TOTAL_POWER = 1,
+    SOCKET_POWER = 2,
+    LIGHT_IN_HOUSE = 4,
+    LIGHT_ON_GARDEN = 8,
     HOUSE_HEATING = 16,
     WATER_HEATING = 32,
-    CONDITIONER = 64,
-    SENSOR_MOVE = 128
+    CONDITIONER = 64
 };
 
-enum eSensord{
-    OUTSIDE_TEMPERATURE,
-    INSIDE_TEMPERATURE,
-    MOVEMENT_SENSOR
-};
 
-void inputParametr(int iTypeSensor){
-    int iValue;
-    do {
-        std::cin >> iValue;
-        if (iTypeSensor == OUTSIDE_TEMPERATURE){
-            if (iValue >= -50 && iValue <= 50)
-            {
-                if (iValue <= 0 && iStatus ^ WATER_HEATING){
-                    iStatus |= WATER_HEATING;
-                    std::cout << "Water heating is enabled!" << std::endl;
-                }
-                if (iValue >= 5 && iStatus & WATER_HEATING){
-                    iStatus &= ~(WATER_HEATING);
-                    std::cout << "Water heating is disabled!" << std::endl;
-                }
-                break;
-            }
-            else std::cout << "Error! Try again from -50 to +50:";
-        } else if (iTypeSensor == INSIDE_TEMPERATURE){
-            if (iValue >= -50 && iValue <= 50)
-            {
-                if (iValue <= 22 && iStatus ^ HOUSE_HEATING){
-                    iStatus |= HOUSE_HEATING;
-                    std::cout << "House heating is enabled!" << std::endl;
-                }
-                if (iValue >= 25 && iStatus & HOUSE_HEATING){
-                    iStatus &= ~(HOUSE_HEATING);
-                    std::cout << "House heating is disabled!" << std::endl;
-                }
-                if (iValue >= 30 && iStatus ^ CONDITIONER){
-                    iStatus |= CONDITIONER;
-                    std::cout << "House's conditioner is enabled!" << std::endl;
-                }
-                if (iValue <= 25 && iStatus & CONDITIONER){
-                    iStatus &= ~(CONDITIONER);
-                    std::cout << "House's conditioner is disabled!" << std::endl;
-                }
-                break;
-            }
-            else std::cout << "Error! Try again from -50 to +50:";
-        } else if (iTypeSensor == MOVEMENT_SENSOR){
-            if (iValue == 1 && iStatus & SENSOR_MOVE) {
-                iStatus |= SENSOR_MOVE;
-                break;
-            }else if (iValue == 2 && iStatus ^ SENSOR_MOVE){
-                iStatus &= ~(SENSOR_MOVE);
-                break;
-            } else {
-                std::cout << "Error! Try again:";
-            }
-        } else {
-            std::cerr << "Sensor type is wrong!" << std::endl;
-            iValue = 0;
-            break;
-        }
-    } while (true);
-
-    //return iValue;
+bool convertMovement (std::string movement)
+{
+    return movement == "yes";
 }
 
-int main() {
-    int tSensorOutside = 0;
-    int tSensorInside = 0;
-    bool bMovementSensor = false;
-    int iTime = 0;
-    do{
-        std::cout << "Input paramerts!" << std::endl;
-        std::cout << "Temperature Outside:";
-        inputParametr(OUTSIDE_TEMPERATURE);
-        std::cout << "Temperature Inside:";
-        inputParametr(INSIDE_TEMPERATURE);
-        std::cout << "Move sensor:" << std::endl << "1. Detected;" << std::endl << "2. Undetected;" << std::endl;
-        inputParametr(MOVEMENT_SENSOR);
-        //garden light
-        if (iTime >= 16 && iTime <= 5){
-            if (iStatus & SENSOR_MOVE){
-                iStatus |= LIGHT_GARDEN;
-            } else {iStatus &= ~(LIGHT_GARDEN);};
-        } else if (iStatus & SENSOR_MOVE) {iStatus &= ~(LIGHT_GARDEN);};
 
-        //time counter
-        if (iTime == 23){
-            iTime = 0;
-        } else {
-            iTime++;
-        }
-    } while (true);
-    return 0;
+bool convertLight (std::string light)
+{
+    return light == "on";
+}
+
+
+void checkLightInHouse (bool lightOn)
+{
+    if ((lightOn) && ((automatics & LIGHT_IN_HOUSE) != LIGHT_IN_HOUSE))
+    {
+        automatics |= LIGHT_IN_HOUSE;
+        std::cout << "\tLight in house is ON";
+    }
+    else
+    if ((automatics & LIGHT_IN_HOUSE) == LIGHT_IN_HOUSE)
+    {
+        automatics &= ~LIGHT_IN_HOUSE;
+        std::cout << "\tLight in house is OFF" << std::endl;
+    }
+}
+
+
+void checkTemperatureLight (int time)
+{
+    int startTime = 16;
+    int endTime = 20;
+    int hightTemperature = 5000;
+    int lowTemperature = 2700;
+
+    std::cout << "\tIn house light temperature is ";
+    if (time < startTime)
+        std::cout << hightTemperature << 'K' << std::endl;
+    else
+    if (time < endTime)
+        std::cout << hightTemperature - ((hightTemperature - lowTemperature) /
+                                         (endTime - startTime) * (time - startTime)) << 'K' << std::endl;
+    else
+        std::cout << lowTemperature << 'K' << std::endl;
+}
+
+
+void checkTemperatureOut (int temperature)
+{
+    if ((temperature < 0) & ((automatics & WATER_HEATING) != WATER_HEATING))
+    {
+        automatics |= WATER_HEATING;
+        std::cout << "\tWater heating is ON" << std::endl;
+    }
+    else
+    if ((temperature > 5) & ((automatics & WATER_HEATING) == WATER_HEATING))
+    {
+        automatics &= ~WATER_HEATING;
+        std::cout << "\tWater heating is OFF" << std::endl;
+    }
+}
+
+
+void checkTemperatureIn (int temperature)
+{
+    if ((temperature < 22) & ((automatics & HOUSE_HEATING) != HOUSE_HEATING))
+    {
+        automatics |= HOUSE_HEATING;
+        std::cout << "\tHouse heating is ON" << std::endl;
+    }
+    else
+    if ((temperature >= 25) & ((automatics & HOUSE_HEATING) == HOUSE_HEATING))
+    {
+        automatics &= ~HOUSE_HEATING;
+        std::cout << "\tHouse heating is OFF" << std::endl;
+    }
+}
+
+
+void checkConditioner (int temperature)
+{
+    if ((temperature >= 30) & ((automatics & CONDITIONER) != CONDITIONER))
+    {
+        automatics |= CONDITIONER;
+        std::cout << "\tConditioner is ON" << std::endl;
+    }
+    else
+    if ((temperature <= 25) & ((automatics & CONDITIONER) == CONDITIONER))
+    {
+        automatics &= ~CONDITIONER;
+        std::cout << "\tConditioner is OFF" << std::endl;
+    }
+}
+
+
+void checkLightOnGarden (int time, bool movement)
+{
+    if (((time < 5 || time > 16) && movement) &
+        ((automatics & LIGHT_ON_GARDEN) != LIGHT_ON_GARDEN))
+    {
+        automatics |= LIGHT_ON_GARDEN;
+        std::cout << "\tLight on garden is ON" << std::endl;
+    }
+    else
+    if (((time >= 5 && time <= 16) || !movement) &
+        ((automatics & LIGHT_ON_GARDEN) == LIGHT_ON_GARDEN))
+    {
+        automatics &= ~LIGHT_ON_GARDEN;
+        std::cout << "\tLight on garden is OFF" << std::endl;
+    }
+}
+
+
+void time (int i)
+{
+    std::cout << "\n\t~~~ Current time is ";
+    if (i < 10)
+        std::cout << "0" << i;
+    else
+        std::cout << i;
+    std::cout << ":00 ~~~" << std::endl;
+}
+
+
+
+int main() {
+    const int totalTime = 48;
+
+    int tempIn, tempOut;
+    bool movement, lightOn;
+
+    for (int i = 0; i < totalTime; ++i)
+    {
+        time (i);
+
+        std::cout << "Input temperature outside house, inside house, " << std::endl;
+        std::cout << "have outside movement (yes/no), light in house (on/off): ";
+        std::string temp;
+        getline(std::cin, temp);
+
+        std::stringstream sstream;
+        sstream << temp;
+
+        std::string movementStr, lightOnStr;
+        sstream >> tempOut >> tempIn >> movementStr >> lightOnStr;
+
+        lightOn = convertLight(lightOnStr);
+        movement = convertMovement(movementStr);
+
+        checkTemperatureOut (tempOut);
+        checkTemperatureIn (tempIn);
+        checkLightOnGarden (i % 24, movement);
+        checkConditioner(tempIn);
+        checkLightInHouse (lightOn);
+        if (lightOn)
+            checkTemperatureLight (i % 24);
+    }
 }
