@@ -1,3 +1,0 @@
-C:/Users/nosf/CLionProjects/radio/cmake-build-debug/CMakeFiles/radio.dir
-C:/Users/nosf/CLionProjects/radio/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/nosf/CLionProjects/radio/cmake-build-debug/CMakeFiles/rebuild_cache.dir

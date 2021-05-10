@@ -1,3 +1,0 @@
-C:/Users/nosf/CLionProjects/housesFloors/cmake-build-debug/CMakeFiles/housesFloors.dir
-C:/Users/nosf/CLionProjects/housesFloors/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/nosf/CLionProjects/housesFloors/cmake-build-debug/CMakeFiles/rebuild_cache.dir

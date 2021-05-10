@@ -1,3 +1,0 @@
-C:/Users/nosf/CLionProjects/battleship-08122020/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-C:/Users/nosf/CLionProjects/battleship-08122020/cmake-build-debug/CMakeFiles/battleship_08122020.dir
-C:/Users/nosf/CLionProjects/battleship-08122020/cmake-build-debug/CMakeFiles/edit_cache.dir
