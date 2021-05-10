@@ -1,12 +1,19 @@
 #include <iostream>
 
+void swap2 (int* a, int* b){
+    *a += *b;
+    *b = *a - *b;
+    *a -= *b;
+}
+
 int main() {
-    int a = 20;
-    int b = 40;
-    int* pa = &a;
-    int* pb = &b;
-    std::cout << *pa << " " << *pb << std::endl;
+    int a, b;
+    std::cout << "Input a and b: ";
+    std::cin >> a >> b;
+    std::cout << a << " " << b << std::endl;
     std::swap(a, b);
-    std::cout << *pa << " " << *pb << std::endl;
+    std::cout << a << " " << b << std::endl;
+    swap2(&a, &b);
+    std::cout << a << " " << b << std::endl;
     return 0;
 }
