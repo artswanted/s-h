@@ -1,14 +1,14 @@
 #include <iostream>
 
-int* revert (int* arr1, int* arr2){
-    for (int i = 9; i > 0; --i){
-        *(arr2 + i) = *(arr1 + 9 - i);
+int* revert (int* pArray, int* pArrayRevert){
+    for (int i = 0; i < 10; ++i){
+        *(pArrayRevert + i) = *(pArray + (10 - 1 - i));
     }
-    return arr2;
+    return pArrayRevert;
 }
 
 int main() {
-    int array[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+    int array[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     int arrayRevert[10];
     int* pArray = array;
     int* pArrayRevert = arrayRevert;
