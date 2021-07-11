@@ -1,0 +1,7 @@
+test mech
+open door
+block water
+tests test
+bread look
+test2 open
+test milk
