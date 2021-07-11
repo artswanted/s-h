@@ -7,7 +7,7 @@ std::string keyWordInput(){
     std::cout << "Enter your word:";
     do {
         std::cin >> keyWord;
-        if (keyWord.size() > 1) break;
+        if (keyWord.size() > 0) break;
         std::cout << "Ops. Your word is so short!";
     } while (true);
     return keyWord;
