@@ -1,25 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include <vector>
 #include <string>
-
-int textFinder (std::vector<std::string> textVec, std::string keyWord){
-    int counter = 0;
-    for (int i = 0; i < textVec.size(); i++){
-        std::string sTempWord = textVec[i];
-        if (sTempWord.size() == keyWord.size()){
-           for (int j = 0; j < keyWord.size(); j++){
-               if (sTempWord[j] != keyWord[j]){
-                   break;
-               }
-               if (j == keyWord.size()-1){
-                   counter++;
-               }
-           }
-        }
-    }
-    return counter;
-}
 
 std::string keyWordInput(){
     std::string keyWord;
@@ -34,22 +15,24 @@ std::string keyWordInput(){
 
 int main() {
     std::string sInputText;
-    std::vector<std::string> vFileRead;
     std::ifstream file;
+    int counter = 0;
     file.open("../words.txt");
+    sInputText = keyWordInput();
+
     while(!file.eof()){
         std::string tempText;
         file >> tempText;
-        vFileRead.push_back(tempText);
+        if (tempText == sInputText)
+        {
+            counter++;
+        }
     }
 
-    sInputText = keyWordInput();
-
-    int result = textFinder(vFileRead, sInputText);
-    if (result > 0){
-        std::cout << "We are found " << result << " same words in file!";
+    if (counter > 0){
+        std::cout << "We are found " << counter << " same words in file!";
     } else {
-        std::cout << "We are found " << result << " words in the file!";
+        std::cout << "We are found " << counter << " words in the file!";
     }
 
     return 0;
