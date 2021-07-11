@@ -44,13 +44,12 @@ int main() {
     }
 
     sInputText = keyWordInput();
-    std::cout << sInputText << std::endl;
 
     int result = textFinder(vFileRead, sInputText);
     if (result > 0){
-        std::cout << "We are found " << result << "same words in file!";
+        std::cout << "We are found " << result << " same words in file!";
     } else {
-        std::cout << "We are found " << result << " worlds in the file!";
+        std::cout << "We are found " << result << " words in the file!";
     }
 
     return 0;
