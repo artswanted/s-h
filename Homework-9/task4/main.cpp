@@ -18,7 +18,7 @@ int main() {
 bool pngChecker(const string sFilePath){
     char headNumber;
     string headChars;
-    ifstream file (sFilePath, std::ios::binary);
+    ifstream file (sFilePath.c_str(), std::ios::binary);
     string fileType = sFilePath.substr(sFilePath.length()-4);
 #ifndef NDEBUG
     cerr << "File type:" << fileType << endl;
@@ -41,7 +41,7 @@ bool pngChecker(const string sFilePath){
     }
 #ifndef NDEBUG
     int debugNumber = headNumber - '0';
-    cerr << debugNumber << endl; //кто составлял задачу? почему тип -119 для png файла? проверил на 3х разных файлах, первый символ -167...
+    cerr << debugNumber << endl; //почему во всех 3х файлах разных, номер не -119, а -167? в чем я ошибся? или это опять задача составлена не правильно?
     cerr << headNumber << endl;
     cerr << headChars << endl;
     assert(headNumber != -119 && headChars != "PNG");
