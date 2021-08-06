@@ -1,9 +1,12 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <vector>
+#include <cassert>
 
 struct paidList {
-    std::string name = "empty";
+    std::string firstNname = "empty";
+    std::string lastName = "empty";
     double money = 0;
     std::string date = "empty";
 };
@@ -11,19 +14,33 @@ struct paidList {
 void addPaid (paidList* person){
     std::ofstream fileWrite ("./paidlist.txt", std::ios::app);
     if (fileWrite.is_open()){
-        fileWrite << person->name << "\t" << person->date << "\t" << person->money << std::endl;
+        fileWrite << person->firstNname << " " << person->lastName << "\t" << person->date << "\t" << person->money << std::endl;
         fileWrite.close();
     } else {
         std::cout << "Error. File cannot be saved!";
     }
 }
 
+void loadList (){
+    std::ifstream fileRead ("./paidlist.txt");
+    paidList person;
+    if (fileRead.is_open()){
+        while (!fileRead.eof()){
+            fileRead >> person.firstNname >> person.lastName >> person.date >> person.money;
+            std::cout << person.firstNname << " " << person.lastName << " " << person.date << " " << person.money << std::endl;;
+        }
+        fileRead.close();
+    } else {
+        std::cout << "Error. File cannot be opened!";
+    }
+}
+
 int main() {
     paidList person;
+    //std::vector <paidList> array = {};
     std::string choice;
     do {
         std::cout << "Input a command \"list\" or \"add\":" << std::endl;
-        //choice what we are doing
         do {
             std::cin >> choice;
             if (choice == "add" || choice == "list") {
@@ -33,37 +50,30 @@ int main() {
             }
         } while (true);
 
-        //add new paid
         if (choice == "add"){
-            std::cout << "Please, enter full name:";
+            std::cout << "Please, enter first name and after enter last name:";
             std::cin.ignore();
-            std::getline (std::cin, person.name);
+            std::getline (std::cin, person.firstNname);
+            std::getline (std::cin, person.lastName);
             do {
-                //std::string date;
                 std::cout << "Enter date (DD.MM.YEAR):";
-                std::cin.ignore();
                 std::getline(std::cin, person.date);
-                person.date = person.date.c_str();
-                std::cout << std::stoi(person.date.substr(0, 2)) << " / " << std::stoi(person.date.substr(3, 2)) << std::endl;
-                std::cout << person.date.substr(2, 1) << " / " << person.date.substr(5, 1) << std::endl;
 
-                if ((std::stoi(person.date.substr(0, 2)) >= 1 && std::stoi(person.date.substr(0, 2)) <= 31) &&
-                (std::stoi(person.date.substr(3, 2)) >= 1 && std::stoi(person.date.substr(3, 2)) <= 12) &&
-                (person.date.substr(2, 1) == "." && person.date.substr(5, 1) == "."))
+                if (person.date.substr(2, 1) == "." && person.date.substr(5, 1) == ".")
                 {
-                    //person.date = date;
                     break;
                 } else {
                     std::cout << "Wrong format! Try again:";
                 }
             } while (true);
 
-            double money;
             std::cout << "Enter salary:";
             std::cin >> person.money;
             addPaid(&person);
-        } else if (choice != "list"){
-            //saveList(*array);
+        } else if (choice == "list"){
+            loadList();
+        } else {
+            break;
         }
     } while (true);
     return 0;
