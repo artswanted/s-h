@@ -13,19 +13,9 @@ enum eBuildingsType
     COUNT_BUILDING_TYPES = 3
         };
 
-enum eRoomsType
-        {
-    BEDROOM = 1,
-    KITCHEN,
-    CHILDRENS_ROOM,
-    LIVING_ROOM,
-    BATHROOM,
-    COUNT_ROOM_TYPES = 5
-        };
-
 struct SRoom
         {
-    eRoomsType type;
+    int type = 0;
     int square = 0;
         };
 
@@ -111,32 +101,32 @@ SFloor fillFloor()
     for (int i = 1; i <= roomCount; ++i)
     {
         std::cout << "Choose one of the types of rooms below for the " << i << " room" << std::endl;
-        std::cout << BEDROOM << ". Bedroom;" << std::endl;
-        std::cout << KITCHEN << ". Kitchen;" << std::endl;
-        std::cout << CHILDRENS_ROOM << ". Childrens room;" << std::endl;
-        std::cout << LIVING_ROOM << ". Living room;" << std::endl;
-        std::cout << BATHROOM << ". Bathroom;" << std::endl;
+        std::cout << "1. Bedroom;" << std::endl;
+        std::cout << "2. Kitchen;" << std::endl;
+        std::cout << "3. Childrens room;" << std::endl;
+        std::cout << "4. Living room;" << std::endl;
+        std::cout << "5. Bathroom;" << std::endl;
         int roomType;
         do
             roomType = enterInt();
-        while (roomType < 1 || roomType > COUNT_ROOM_TYPES);
+        while (roomType < 1 || roomType > 5);
 
-        std::cout << "Enter square this room: ";
+        std::cout << "Enter square this room:";
         SRoom currentRoom;
         currentRoom.square = enterInt();
 
         switch (roomType)
         {
-            case BEDROOM:
-                currentRoom.type = BEDROOM; break;
-                case KITCHEN:
-                    currentRoom.type = KITCHEN;	break;
-                    case CHILDRENS_ROOM:
-                        currentRoom.type = CHILDRENS_ROOM; break;
-                        case LIVING_ROOM:
-                            currentRoom.type = LIVING_ROOM; break;
-                            case BATHROOM:
-                                currentRoom.type = BATHROOM; break;
+            case 1:
+                currentRoom.type = 1; break;
+                case 2:
+                    currentRoom.type = 2;	break;
+                    case 3:
+                        currentRoom.type = 3; break;
+                        case 4:
+                            currentRoom.type = 4; break;
+                            case 5:
+                                currentRoom.type = 5; break;
         }
         floor.room.push_back(currentRoom);
     }
@@ -146,9 +136,9 @@ SFloor fillFloor()
 
 void fillHouse(SPieceOfLand& piece)
 {
-    std::cout << "Does your house have chimney? (y/n): ";
+    std::cout << "Does your house have chimney? (y/n):";
     if (enterYN() == 'y')	piece.house.chimney = true;
-    std::cout << "How many floors on your house? ";
+    std::cout << "How many floors on your house?";
     int floorCount = enterInt();
 
     for (int i = 1; i <= floorCount; ++i)
@@ -197,7 +187,7 @@ void fillBathhouse(SPieceOfLand &piece)
     else
     {
         std::cout << "Square of your bathhouse was added" << std::endl << std::endl;
-        std::cout << "Does you bathhouse has chimney? (y/n): ";
+        std::cout << "Does you bathhouse has chimney? (y/n):";
         if (enterYN() == 'y')
             piece.bathhouse.chimney = true;
     }
@@ -206,7 +196,7 @@ void fillBathhouse(SPieceOfLand &piece)
 SPieceOfLand fillPieceOfLand()
 {
     SPieceOfLand pieceOfLand;
-    std::cout << "Enter unique number of your piece of land: ";
+    std::cout << "Enter unique number of your piece of land:";
     std::cin >> pieceOfLand.uniqueNumber;
 
     fillHouse(pieceOfLand);
@@ -214,7 +204,7 @@ SPieceOfLand fillPieceOfLand()
     bool next = false;
     do
     {
-        std::cout << "Do you have some buildings? (y/n): ";
+        std::cout << "Do you have some buildings? (y/n):";
 
         if (enterYN() == 'y')
         {
@@ -282,22 +272,22 @@ void outResult(std::vector <SPieceOfLand>& piecesOfLand)
             for (int r = 0; r < piecesOfLand[p].house.floor[f].room.size(); ++r)
                 switch (piecesOfLand[p].house.floor[f].room[r].type)
                 {
-                case BEDROOM:
+                case 1:
                     ++totalBedrooms; break;
-                    case KITCHEN:
+                    case 2:
                         ++totalKitchens; break;
-                        case CHILDRENS_ROOM:
+                        case 3:
                             ++totalChildrenRooms; break;
-                            case LIVING_ROOM:
+                            case 4:
                                 ++totalLivingRooms; break;
-                                case BATHROOM:
+                                case 5:
                                     ++totalBathrooms; break;
                 }
         }
 
     }
 
-    std::cout << "Total count of buildings is  " << totalBuildings << std::endl;
+    std::cout << "Total count of buildings is " << totalBuildings << std::endl;
     std::cout << "Total square of buildings is " << totalSquare << std::endl;
     std::cout << "Total count of rooms is " << totalRooms << std::endl;
     std::cout.width(20);
