@@ -7,10 +7,11 @@ int totalPieceOfLand;
 
 enum eBuildingsType
         {
-    GARAGE = 1,
+    HOUSE,
+    GARAGE,
     BARN,
     BATHHOUSE,
-    COUNT_BUILDING_TYPES = 3
+    COUNT_BUILDING_TYPES
         };
 
 struct SRoom
@@ -25,9 +26,15 @@ struct SFloor
     std::vector <SRoom> room;
         };
 
+struct Sbuilding{
+    int type = 0;
+};
+
 struct SPieceOfLand
         {
     std::string uniqueNumber;
+    std::vector <Sbuilding> buildsArray;
+    int housesAmount;
 
     struct SHouse
             {
@@ -196,15 +203,22 @@ void fillBathhouse(SPieceOfLand &piece)
 SPieceOfLand fillPieceOfLand()
 {
     SPieceOfLand pieceOfLand;
+    Sbuilding building;
     std::cout << "Enter unique number of your piece of land:";
     std::cin >> pieceOfLand.uniqueNumber;
 
-    fillHouse(pieceOfLand);
+    std::cout << "Enter houses amount at your land:";
+    std::cin >> pieceOfLand.housesAmount;
+    for(int m = 0; m < pieceOfLand.housesAmount; m++){
+        building.type = HOUSE;
+        pieceOfLand.buildsArray.push_back(building);
+        fillHouse(pieceOfLand);
+    }
 
     bool next = false;
     do
     {
-        std::cout << "Do you have some buildings? (y/n):";
+        std::cout << "Do you have some other buildings? (y/n):";
 
         if (enterYN() == 'y')
         {
@@ -217,17 +231,29 @@ SPieceOfLand fillPieceOfLand()
                 std::cout << BATHHOUSE << ". Bathhouse." << std::endl;
                 std::cout << "0. Exit from this piece of land" << std::endl;
                 answer = enterInt();
-            } while (answer < 0 || answer > COUNT_BUILDING_TYPES);
+            } while (answer < 0 || answer > COUNT_BUILDING_TYPES-1);
 
             switch (answer)
             {
                 case GARAGE:
-                    fillGarage(pieceOfLand); break;
-                    case BARN:
-                        fillBarn(pieceOfLand); break;
-                        case BATHHOUSE:
-                            fillBathhouse(pieceOfLand); break;
-                            case 0: next = true; break;
+                {
+                    fillGarage(pieceOfLand);
+                    building.type = GARAGE;
+                    pieceOfLand.buildsArray.push_back(building);
+                }break;
+                case BARN:
+                {
+                    fillBarn(pieceOfLand);
+                    building.type = BARN;
+                    pieceOfLand.buildsArray.push_back(building);
+                } break;
+                case BATHHOUSE:
+                {
+                    fillBathhouse(pieceOfLand);
+                    building.type = BATHHOUSE;
+                    pieceOfLand.buildsArray.push_back(building);
+                } break;
+                default: next = true; break;
             }
         }
         else next = true;
@@ -247,6 +273,11 @@ void outResult(std::vector <SPieceOfLand>& piecesOfLand)
     int totalChildrenRooms = 0;
     int totalLivingRooms = 0;
     int totalBathrooms = 0;
+    //--
+    int totalHouses = 0;
+    int totalGarage = 0;
+    int totalBarn = 0;
+    int totalBathhouses = 0;
 
     for (int p = 0; p < totalPieceOfLand; ++p)
     {
@@ -285,9 +316,23 @@ void outResult(std::vector <SPieceOfLand>& piecesOfLand)
                 }
         }
 
+        for (int f = 0; f < piecesOfLand[p].buildsArray.size(); ++f)
+        {
+            switch (piecesOfLand[p].buildsArray[f].type)
+            {
+                case 0:
+                    ++totalHouses; break;
+                    case 1:
+                        ++totalGarage; break;
+                        case 2:
+                            ++totalBarn; break;
+                            case 3:
+                                ++totalBathhouses; break;
+            }
+        }
     }
 
-    std::cout << "Total count of buildings is " << totalBuildings << std::endl;
+    std::cout << "Total count of buildings is  " << totalBuildings << std::endl;
     std::cout << "Total square of buildings is " << totalSquare << std::endl;
     std::cout << "Total count of rooms is " << totalRooms << std::endl;
     std::cout.width(20);
@@ -300,6 +345,15 @@ void outResult(std::vector <SPieceOfLand>& piecesOfLand)
     std::cout << "living rooms: " << totalLivingRooms << std::endl;
     std::cout.width(20);
     std::cout << "bathrooms: " << totalBathrooms << std::endl;
+    std::cout << "New data added:" << std::endl;
+    std::cout.width(20);
+    std::cout << "Total Houses: " << totalHouses << std::endl;
+    std::cout.width(20);
+    std::cout << "Total Garage: " << totalGarage << std::endl;
+    std::cout.width(20);
+    std::cout << "Total Barn: " << totalBarn << std::endl;
+    std::cout.width(20);
+    std::cout << "Total bathhouses: " << totalBathhouses << std::endl;
 }
 
 int main()
