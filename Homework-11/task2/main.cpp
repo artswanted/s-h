@@ -5,15 +5,6 @@
 
 int totalPieceOfLand;
 
-enum eBuildingsType
-        {
-    HOUSE,
-    GARAGE,
-    BARN,
-    BATHHOUSE,
-    COUNT_BUILDING_TYPES
-        };
-
 struct SRoom
  {
     //int type = 0;
@@ -35,6 +26,14 @@ struct SFloor
 
 struct Sbuilding{
     int type = 0;
+    enum eBuildingsType
+    {
+        HOUSE,
+        GARAGE,
+        BARN,
+        BATHHOUSE,
+        COUNT_BUILDING_TYPES
+    } eBuildType;
 };
 
 struct SPieceOfLand
@@ -87,12 +86,12 @@ int enterInt()
     return (std::stoi(tmp));
 }
 
-int fillSquare(const std::string& buildingName)
+/*int fillSquare(const std::string& buildingName)
 {
     std::cout << "Enter square of your " << buildingName << ": ";
 
     return (enterInt());
-}
+}*/
 
 char enterYN()
 {
@@ -163,7 +162,7 @@ void fillHouse(SPieceOfLand& piece)
     }
 }
 
-void fillGarage(SPieceOfLand &piece)
+/*void fillGarage(SPieceOfLand &piece)
 {
     piece.garage.enable = true;
     piece.garage.square = fillSquare("garage");
@@ -173,9 +172,9 @@ void fillGarage(SPieceOfLand &piece)
         std::cout << "Garage wasn't added ~" << std::endl;
     }
     else	std::cout << "Square of your garage was added ~" << std::endl;
-}
+}*/
 
-void fillBarn(SPieceOfLand &piece)
+/*void fillBarn(SPieceOfLand &piece)
 {
     piece.barn.enable = true;
     piece.barn.square = fillSquare("barn");
@@ -187,9 +186,9 @@ void fillBarn(SPieceOfLand &piece)
     }
     else
         std::cout << "Square of your barn was added ~" << std::endl;
-}
+}*/
 
-void fillBathhouse(SPieceOfLand &piece)
+/*void fillBathhouse(SPieceOfLand &piece)
 {
     piece.bathhouse.enable = true;
     piece.bathhouse.square = fillSquare("bathhouse");
@@ -206,7 +205,7 @@ void fillBathhouse(SPieceOfLand &piece)
         if (enterYN() == 'y')
             piece.bathhouse.chimney = true;
     }
-}
+}*/
 
 SPieceOfLand fillPieceOfLand()
 {
@@ -218,7 +217,7 @@ SPieceOfLand fillPieceOfLand()
     std::cout << "Enter houses amount at your land:";
     std::cin >> pieceOfLand.housesAmount;
     for(int m = 0; m < pieceOfLand.housesAmount; m++){
-        building.type = HOUSE;
+        building.eBuildType = building.HOUSE;
         pieceOfLand.buildsArray.push_back(building);
         fillHouse(pieceOfLand);
     }
@@ -234,35 +233,33 @@ SPieceOfLand fillPieceOfLand()
             do
             {
                 std::cout << "Choose one of this:" << std::endl;
-                std::cout << GARAGE << ". Garage;" << std::endl;
-                std::cout << BARN << ". Barn;" << std::endl;
-                std::cout << BATHHOUSE << ". Bathhouse." << std::endl;
+                std::cout << building.GARAGE << ". Garage;" << std::endl;
+                std::cout << building.BARN << ". Barn;" << std::endl;
+                std::cout << building.BATHHOUSE << ". Bathhouse." << std::endl;
                 std::cout << "0. Exit from this piece of land" << std::endl;
                 answer = enterInt();
-            } while (answer < 0 || answer > COUNT_BUILDING_TYPES-1);
+            } while (answer < 0 || answer > building.COUNT_BUILDING_TYPES-1);
 
             switch (answer)
             {
-                case GARAGE:
+                case building.GARAGE:
                 {
-                    fillGarage(pieceOfLand);
-                    building.type = GARAGE;
-                    pieceOfLand.buildsArray.push_back(building);
+                    //fillGarage(pieceOfLand);
+                    building.eBuildType = building.GARAGE;
                 }break;
-                case BARN:
+                case building.BARN:
                 {
-                    fillBarn(pieceOfLand);
-                    building.type = BARN;
-                    pieceOfLand.buildsArray.push_back(building);
+                    //fillBarn(pieceOfLand);
+                    building.eBuildType = building.BARN;
                 } break;
-                case BATHHOUSE:
+                case building.BATHHOUSE:
                 {
-                    fillBathhouse(pieceOfLand);
-                    building.type = BATHHOUSE;
-                    pieceOfLand.buildsArray.push_back(building);
+                    //fillBathhouse(pieceOfLand);
+                    building.eBuildType = building.BATHHOUSE;
                 } break;
                 default: next = true; break;
             }
+            pieceOfLand.buildsArray.push_back(building);
         }
         else next = true;
     }
@@ -289,7 +286,7 @@ void outResult(std::vector <SPieceOfLand>& piecesOfLand)
 
     for (int p = 0; p < totalPieceOfLand; ++p)
     {
-        if (piecesOfLand[p].barn.enable)
+       /* if (piecesOfLand[p].barn.enable)
         {
             totalSquare += piecesOfLand[p].barn.square;
             ++totalBuildings;
@@ -303,7 +300,7 @@ void outResult(std::vector <SPieceOfLand>& piecesOfLand)
         {
             totalSquare += piecesOfLand[p].garage.square;
             ++totalBuildings;
-        }
+        }*/
 
         for (int f = 0; f < piecesOfLand[p].house.floor.size(); ++f)
         {
@@ -329,22 +326,34 @@ void outResult(std::vector <SPieceOfLand>& piecesOfLand)
 
         for (int f = 0; f < piecesOfLand[p].buildsArray.size(); ++f)
         {
-            switch (piecesOfLand[p].buildsArray[f].type)
+            Sbuilding buildType;
+            switch (piecesOfLand[p].buildsArray[f].eBuildType)
             {
-                case 0:
-                    ++totalHouses; break;
-                    case 1:
-                        ++totalGarage; break;
-                        case 2:
-                            ++totalBarn; break;
-                            case 3:
-                                ++totalBathhouses; break;
+                case buildType.HOUSE:{
+                    ++totalBuildings;
+                    ++totalHouses;
+                } break;
+                case buildType.GARAGE:
+                {
+                    ++totalGarage;
+                    ++totalHouses;
+                } break;
+                case buildType.BARN:
+                {
+                    ++totalBarn;
+                    ++totalHouses;
+                } break;
+                case buildType.BATHHOUSE:
+                {
+                    ++totalBathhouses;
+                    ++totalHouses;
+                } break;
             }
         }
     }
 
-    std::cout << "Total count of buildings is  " << totalBuildings << std::endl;
-    std::cout << "Total square of buildings is " << totalSquare << std::endl;
+    std::cout << "Total count of buildings is " << totalBuildings << std::endl;
+    //std::cout << "Total square of buildings is " << totalSquare << std::endl;
     std::cout << "Total count of rooms is " << totalRooms << std::endl;
     std::cout.width(20);
     std::cout << "bedrooms: " << totalBedrooms << std::endl;
@@ -356,7 +365,7 @@ void outResult(std::vector <SPieceOfLand>& piecesOfLand)
     std::cout << "living rooms: " << totalLivingRooms << std::endl;
     std::cout.width(20);
     std::cout << "bathrooms: " << totalBathrooms << std::endl;
-    std::cout << "New data added:" << std::endl;
+    //std::cout << "New data added:" << std::endl;
     std::cout.width(20);
     std::cout << "Total Houses: " << totalHouses << std::endl;
     std::cout.width(20);
