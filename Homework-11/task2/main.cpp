@@ -15,10 +15,17 @@ enum eBuildingsType
         };
 
 struct SRoom
-        {
-    int type = 0;
+ {
+    //int type = 0;
     int square = 0;
-        };
+    enum {
+        BEDROOM = 1,
+        KITCHEN,
+        CHILDRENS_ROOM,
+        LIVING_ROOM,
+        BATHROOM
+    } eRoomType;
+};
 
 struct SFloor
         {
@@ -124,17 +131,18 @@ SFloor fillFloor()
 
         switch (roomType)
         {
-            case 1:
-                currentRoom.type = 1; break;
-                case 2:
-                    currentRoom.type = 2;	break;
-                    case 3:
-                        currentRoom.type = 3; break;
-                        case 4:
-                            currentRoom.type = 4; break;
-                            case 5:
-                                currentRoom.type = 5; break;
+            case currentRoom.BEDROOM:
+                currentRoom.eRoomType = currentRoom.BEDROOM; break;
+                case currentRoom.KITCHEN:
+                    currentRoom.eRoomType = currentRoom.KITCHEN;	break;
+                    case currentRoom.CHILDRENS_ROOM:
+                        currentRoom.eRoomType = currentRoom.CHILDRENS_ROOM; break;
+                        case currentRoom.LIVING_ROOM:
+                            currentRoom.eRoomType = currentRoom.LIVING_ROOM; break;
+                            case currentRoom.BATHROOM:
+                                currentRoom.eRoomType = currentRoom.BATHROOM; break;
         }
+        //std::cout << currentRoom.eRoomType;
         floor.room.push_back(currentRoom);
     }
 
@@ -301,19 +309,22 @@ void outResult(std::vector <SPieceOfLand>& piecesOfLand)
         {
             totalRooms += piecesOfLand[p].house.floor[f].room.size();
             for (int r = 0; r < piecesOfLand[p].house.floor[f].room.size(); ++r)
-                switch (piecesOfLand[p].house.floor[f].room[r].type)
+            {
+                SRoom currentRoom;
+                switch (piecesOfLand[p].house.floor[f].room[r].eRoomType)
                 {
-                case 1:
+                case currentRoom.BEDROOM:
                     ++totalBedrooms; break;
-                    case 2:
+                    case currentRoom.KITCHEN:
                         ++totalKitchens; break;
-                        case 3:
+                        case currentRoom.CHILDRENS_ROOM:
                             ++totalChildrenRooms; break;
-                            case 4:
+                            case currentRoom.LIVING_ROOM:
                                 ++totalLivingRooms; break;
-                                case 5:
+                                case currentRoom.BATHROOM:
                                     ++totalBathrooms; break;
                 }
+            }
         }
 
         for (int f = 0; f < piecesOfLand[p].buildsArray.size(); ++f)
