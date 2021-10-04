@@ -4,9 +4,10 @@
 
 int main()
 {
-    std::map <std::string, std::string> registry;
+    std::map <int, std::string> registry;
     std::string answer;
     int count = 0;
+    
     while (true)
     {
         std::cout << "Please input a name" << std::endl;
@@ -20,7 +21,9 @@ int main()
         {
             //std::cout << answer + std::to_string(count) << std::endl;
             //registry.insert(std::pair<std::string, std::string>(answer + std::to_string(count), answer));
-            registry.insert(std::make_pair(answer + std::to_string(count), answer));
+            int counter = std::atoi(answer.c_str());
+            counter += count;
+            registry.insert(std::make_pair(counter, answer));
             count++;
         }
     }
