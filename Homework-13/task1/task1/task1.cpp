@@ -8,6 +8,14 @@
 #define SATURDAY "Saturday"
 #define SUNDAY "Sunday"
 
+#define MONDAY_NUM 1
+#define TUESDAY_NUM 2
+#define WEDNESDAY_NUM 3
+#define THURSDAY_NUM 4
+#define FRIDAY_NUM 5
+#define SATURDAY_NUM 6
+#define SUNDAY_NUM 7
+
 int main()
 {
     int answer;
@@ -15,25 +23,25 @@ int main()
     std::cin >> answer;
 	switch (answer)
 	{
-		case (1): {
+		case (MONDAY_NUM): {
 			std::cout << "Today is " MONDAY << std::endl;
 		} break;
-		case (2): {
+		case (TUESDAY_NUM): {
 			std::cout << "Today is " TUESDAY << std::endl;
 		} break;
-		case (3): {
+		case (WEDNESDAY_NUM): {
 			std::cout << "Today is " WEDNESDAY << std::endl;
 		} break;
-		case (4): {
+		case (THURSDAY_NUM): {
 			std::cout << "Today is " THURSDAY << std::endl;
 		} break;
-		case (5): {
+		case (FRIDAY_NUM): {
 			std::cout << "Today is " FRIDAY << std::endl;
 		} break;
-		case (6): {
+		case (SATURDAY_NUM): {
 			std::cout << "Today is " SATURDAY << std::endl;
 		} break;
-		case (7): {
+		case (SUNDAY_NUM): {
 			std::cout << "Today is " SUNDAY << std::endl;
 		} break;
 		default: {
