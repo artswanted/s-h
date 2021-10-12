@@ -1,20 +1,22 @@
 ﻿#include <iostream>
 
-#define MONDAY "Monday"
-#define TUESDAY "Tuesday"
-#define WEDNESDAY "Wednesday"
-#define THURSDAY "Thursday"
-#define FRIDAY "Friday"
-#define SATURDAY "Saturday"
-#define SUNDAY "Sunday"
+#define MONDAY_NAME "Monday"
+#define TUESDAY_NAME "Tuesday"
+#define WEDNESDAY_NAME "Wednesday"
+#define THURSDAY_NAME "Thursday"
+#define FRIDAY_NAME "Friday"
+#define SATURDAY_NAME "Saturday"
+#define SUNDAY_NAME "Sunday"
 
-#define MONDAY_NUM 1
-#define TUESDAY_NUM 2
-#define WEDNESDAY_NUM 3
-#define THURSDAY_NUM 4
-#define FRIDAY_NUM 5
-#define SATURDAY_NUM 6
-#define SUNDAY_NUM 7
+#define MONDAY 1
+#define TUESDAY 2
+#define WEDNESDAY 3
+#define THURSDAY 4
+#define FRIDAY 5
+#define SATURDAY 6
+#define SUNDAY 7
+
+#define GETNAME(index) index ## _NAME
 
 int main()
 {
@@ -23,26 +25,26 @@ int main()
     std::cin >> answer;
 	switch (answer)
 	{
-		case (MONDAY_NUM): {
-			std::cout << "Today is " MONDAY << std::endl;
+		case (MONDAY): {
+			std::cout << "Today is " GETNAME(MONDAY) << std::endl;
 		} break;
-		case (TUESDAY_NUM): {
-			std::cout << "Today is " TUESDAY << std::endl;
+		case (TUESDAY): {
+			std::cout << "Today is " GETNAME(TUESDAY) << std::endl;
 		} break;
-		case (WEDNESDAY_NUM): {
-			std::cout << "Today is " WEDNESDAY << std::endl;
+		case (WEDNESDAY): {
+			std::cout << "Today is " GETNAME(WEDNESDAY) << std::endl;
 		} break;
-		case (THURSDAY_NUM): {
-			std::cout << "Today is " THURSDAY << std::endl;
+		case (THURSDAY): {
+			std::cout << "Today is " GETNAME(THURSDAY) << std::endl;
 		} break;
-		case (FRIDAY_NUM): {
-			std::cout << "Today is " FRIDAY << std::endl;
+		case (FRIDAY): {
+			std::cout << "Today is " GETNAME(FRIDAY) << std::endl;
 		} break;
-		case (SATURDAY_NUM): {
-			std::cout << "Today is " SATURDAY << std::endl;
+		case (SATURDAY): {
+			std::cout << "Today is " GETNAME(SATURDAY) << std::endl;
 		} break;
-		case (SUNDAY_NUM): {
-			std::cout << "Today is " SUNDAY << std::endl;
+		case (SUNDAY): {
+			std::cout << "Today is " GETNAME(SUNDAY) << std::endl;
 		} break;
 		default: {
 			std::cout << "Wrong day!" << std::endl;
