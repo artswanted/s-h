@@ -35,13 +35,13 @@ int main() {
         cin >> get_time(&local, "%Y-%m-%d");
         person.push_back({ answer, local.tm_year, local.tm_mon, local.tm_mday });
     }
-    for (int i = 0; i <= person.size(); i++)
+    for (int i = 0; i < person.size(); i++)
     {
         int bufferMonth = person[i].month;
         int bufferDate = person[i].day;
         if ((bufferMonth >= currentMonth) && (bufferDate >= currentDate) && ((bufferMonth - currentMonth) == deltaMonth) && ((bufferDate - currentDate) == deltaDay))
         {
-            nearestName += person[i].name;
+            nearestName += " & "s + person[i].name;
         }
         else if ((bufferMonth >= currentMonth) && (bufferDate >= currentDate) && ((bufferMonth - currentMonth) < deltaMonth) && ((bufferDate - currentDate) < deltaDay))
         {
