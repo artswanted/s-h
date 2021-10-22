@@ -1,4 +1,5 @@
-//
-// Created by dmytr on 22.10.2021.
-//
+#include "operation.h"
 
+void scalpel_start (POINT Begin, POINT end){
+
+}
