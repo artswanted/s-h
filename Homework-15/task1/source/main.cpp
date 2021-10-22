@@ -1,4 +1,3 @@
-#include <iostream>
 #include "operation.h"
 
 using namespace std;
@@ -6,13 +5,11 @@ using namespace std;
 int main() {
     POINT begin, end, temp;
     string choice;
-    //bool bStart = false;
 
     cout << "Input \"scalpel\" for start operation" << endl;
     cin >> choice;
 
     if (choice == "scalpel"s){
-        //bStart = true;
         scalpel_start(begin, end);
 
         while (choice != "suture"s){
@@ -25,7 +22,11 @@ int main() {
                 hemostat_start(begin, end, temp);
             } else if (choice == "tweezers"s){
                 tweezers_start(begin, end, temp);
-            } else if (choice == "suture"s)
+            } else if (choice == "suture"s){
+                suture_start (begin, end);
+            } else {
+                cerr << "Wrong input. Try another command!";
+            }
         }
 
     } else {
