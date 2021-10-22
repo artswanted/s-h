@@ -11,10 +11,17 @@ enum ERROR{
     WRONG_INPUT,
     WRONG_START,
     NEXT_STEP,
-    WELCOME
+    WELCOME,
+    SCALPEL_FIRST,
+    SCALPEL_SECOND,
+    SCALPEL_CUT_1,
+    SCALPEL_CUT_2,
+    HEMOSTAT_START,
+    HEMOSTAT_ERROR
 };
 
 void print_message(int iType);
+void print_message_advance(int iType, double x, double y);
 
 
 #endif //SIMULATOR_MESSAGE_BOX_H

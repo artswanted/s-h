@@ -6,7 +6,7 @@ int main() {
     POINT begin, end, temp;
     string choice;
 
-    print_message(WELCOME);
+    print_message(ERROR::WELCOME);
     cin >> choice;
 
     if (choice == "scalpel"s){
@@ -15,7 +15,6 @@ int main() {
         while (choice != "suture"s){
             print_message(NEXT_STEP);
             cin >> choice;
-
             if (choice == "scalpel"s){
                 print_message(ALREADY_STARTED);
             } else if (choice == "hemostat"s) {

@@ -20,8 +20,28 @@ void print_message(int iType){
         case WELCOME:{
             cout << "Input \"scalpel\" for start operation" << endl;
         } break;
+        case SCALPEL_FIRST:{
+            cout << "Enter coordinates for first point:" << endl;
+        } break;
+        case SCALPEL_SECOND:{
+            cout << "Enter coordinates for finish point" << endl;
+        } break;
         default:{
             cerr << "Unauthorized command!" << endl;
-        }
+        } break;
+    }
+}
+
+void print_message_advance(int iType, double x, double y){
+    switch (iType) {
+        case SCALPEL_CUT_1:{
+            cout << "Operation is started with first point. X:" << x << ", Y:" << y << endl;
+        }break;
+        case SCALPEL_CUT_2:{
+            cout << "Second operation point. X:" << x << ", Y:" << y << endl;
+        }break;
+        default:{
+            cerr << "Unauthorized command!" << endl;
+        } break;
     }
 }
