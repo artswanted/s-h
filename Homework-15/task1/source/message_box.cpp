@@ -26,6 +26,12 @@ void print_message(int iType){
         case SCALPEL_SECOND:{
             cout << "Enter coordinates for finish point" << endl;
         } break;
+        case HEMOSTAT_START:{
+            cout << "Enter X and Y where you need place hemostat:" << endl;
+        } break;
+        case HEMOSTAT_ERROR:{
+            cout << "You cannot place hemostat here!" << endl << "Input new coordinates:" << endl;
+        } break;
         default:{
             cerr << "Unauthorized command!" << endl;
         } break;
@@ -39,6 +45,12 @@ void print_message_advance(int iType, double x, double y){
         }break;
         case SCALPEL_CUT_2:{
             cout << "Second operation point. X:" << x << ", Y:" << y << endl;
+        }break;
+        case HEMOSTAT_CUT:{
+            cout << "Hemostat is located: X:" << x << ", Y:" << y << endl;
+        }break;
+        case TWEEZERS_CUT:{
+            cout << "Tweezers is applied: X:" << x << ", Y:" << y << endl;
         }break;
         default:{
             cerr << "Unauthorized command!" << endl;

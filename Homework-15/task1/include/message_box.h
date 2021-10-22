@@ -17,7 +17,11 @@ enum ERROR{
     SCALPEL_CUT_1,
     SCALPEL_CUT_2,
     HEMOSTAT_START,
-    HEMOSTAT_ERROR
+    HEMOSTAT_ERROR,
+    HEMOSTAT_CUT,
+    TWEEZERS_START,
+    TWEEZERS_ERROR,
+    TWEEZERS_CUT
 };
 
 void print_message(int iType);
