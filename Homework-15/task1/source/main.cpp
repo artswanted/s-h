@@ -6,18 +6,18 @@ int main() {
     POINT begin, end, temp;
     string choice;
 
-    cout << "Input \"scalpel\" for start operation" << endl;
+    print_message(WELCOME);
     cin >> choice;
 
     if (choice == "scalpel"s){
         scalpel_start(begin, end);
 
         while (choice != "suture"s){
-            cout << "What's step is next?" << endl;
+            print_message(NEXT_STEP);
             cin >> choice;
 
             if (choice == "scalpel"s){
-                cerr << "You're already cutted the patiend. Input another command!" << endl;
+                print_message(ALREADY_STARTED);
             } else if (choice == "hemostat"s) {
                 hemostat_start(begin, end, temp);
             } else if (choice == "tweezers"s){
@@ -25,12 +25,12 @@ int main() {
             } else if (choice == "suture"s){
                 suture_start (begin, end);
             } else {
-                cerr << "Wrong input. Try another command!";
+                print_message(WRONG_INPUT);
             }
         }
 
     } else {
-        cout << "Wrong command!" << endl << "Input \"scalpel\" for start operation" << endl;
+        print_message(WRONG_START);
     }
 
     return 0;
