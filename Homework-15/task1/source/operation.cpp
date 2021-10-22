@@ -32,5 +32,7 @@ void tweezers_start (POINT& begin, POINT& end, POINT& temp){
 }
 
 void suture_start (POINT& begin, POINT& end){
-
+    print_message(SUTURE_FINISH);
+    print_message_advance(SUTURE_LINE_1, begin.x, begin.y);
+    print_message_advance(SUTURE_LINE_2, end.x, end.y);
 }

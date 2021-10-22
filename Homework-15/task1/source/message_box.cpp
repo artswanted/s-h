@@ -32,6 +32,15 @@ void print_message(int iType){
         case HEMOSTAT_ERROR:{
             cout << "You cannot place hemostat here!" << endl << "Input new coordinates:" << endl;
         } break;
+        case TWEEZERS_START:{
+            cout << "Enter X and Y where you need place tweezers:" << endl;
+        } break;
+        case TWEEZERS_ERROR:{
+            cout << "You cannot place tweezers here!" << endl << "Input new coordinates:" << endl;
+        } break;
+        case SUTURE_FINISH:{
+            cout << "Operation is finished. Patient is not died!" << endl;
+        } break;
         default:{
             cerr << "Unauthorized command!" << endl;
         } break;
@@ -51,6 +60,12 @@ void print_message_advance(int iType, double x, double y){
         }break;
         case TWEEZERS_CUT:{
             cout << "Tweezers is applied: X:" << x << ", Y:" << y << endl;
+        }break;
+        case SUTURE_LINE_1:{
+            cout << "Seam is started from: X:" << x << ", Y:" << y << endl;
+        }break;
+        case SUTURE_LINE_2:{
+            cout << "Seam is finished at: X:" << x << ", Y:" << y << endl;
         }break;
         default:{
             cerr << "Unauthorized command!" << endl;

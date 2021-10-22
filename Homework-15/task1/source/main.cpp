@@ -6,7 +6,7 @@ int main() {
     POINT begin, end, temp;
     string choice;
 
-    print_message(ERROR::WELCOME);
+    print_message(MESSAGE::WELCOME);
     cin >> choice;
 
     if (choice == "scalpel"s){

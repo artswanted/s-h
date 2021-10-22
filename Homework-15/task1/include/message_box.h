@@ -6,7 +6,7 @@
 
 #include "operation.h"
 
-enum ERROR{
+enum MESSAGE{
     ALREADY_STARTED = 1,
     WRONG_INPUT,
     WRONG_START,
@@ -21,7 +21,10 @@ enum ERROR{
     HEMOSTAT_CUT,
     TWEEZERS_START,
     TWEEZERS_ERROR,
-    TWEEZERS_CUT
+    TWEEZERS_CUT,
+    SUTURE_FINISH,
+    SUTURE_LINE_1,
+    SUTURE_LINE_2
 };
 
 void print_message(int iType);
