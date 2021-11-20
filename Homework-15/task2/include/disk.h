@@ -1,4 +1,6 @@
 #include "main.h"
 #include <string>
 
-void compute(std::string& array);
+void write(std::string& array);
+
+void read (std::string& array);

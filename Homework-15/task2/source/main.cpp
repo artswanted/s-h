@@ -1,10 +1,10 @@
 #include <main.h>
 
 int main() {
-    std::string operateMemory = "11111111";
-    int answer=0;
+        int answer=0;
     while (answer != 6)
     {
+        std::string operateMemory = loadMemCache();
         std::cout << "Please choose needed action" << std::endl;
         std::cout << "1. SUM" << std::endl;
         std::cout << "2. SAVE" << std::endl;
@@ -18,6 +18,7 @@ int main() {
         else if (answer == 3) read (operateMemory);
         else if (answer == 4) input (operateMemory);
         else if (answer == 5) display(operateMemory);
+        writeMemoryCache(operateMemory);
     }
     std::cout << "Simulation is finished" << std::endl;
 

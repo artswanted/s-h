@@ -1,7 +1,7 @@
 #include "main.h"
 #include <string>
 
-void write(std::string& array);
+std::string loadMemCache ();
 
-void read (std::string& array);
+void writeMemoryCache(std::string cachedMemory);
 
