@@ -13,8 +13,8 @@ public:
         return musicList[1][1];
     }
 
-    bool trackChecker(std::string trackName){
-        return true;
+    std::string trackChecker(std::string trackName){
+        return;
     }
 };
 
@@ -24,9 +24,14 @@ private:
     int currentTrack = 0;
 public:
     void play(std::string trackName){
-        if (Track_t.trackChecker(trackName)){
-
-            std::cout << Track_t.getNextTrack();
+        if (currentTrack == 0){
+            std::string name = Track_t.trackChecker(trackName);
+            if (name != "null"){
+                currentTrack = 1;
+                std::cout << name;
+            } else if (name == "null"){
+                std::cout << "Track is nor found!";
+            }
         }
     }
 
