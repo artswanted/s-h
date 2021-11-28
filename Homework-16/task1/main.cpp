@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <ctime>
 
 class Track {
 private:
@@ -12,7 +13,10 @@ private:
 public:
     std::string getNextTrack()
     {
-        return musicList[1][1];
+        std::srand(time(0));
+        int randTrackNo = rand() % 4;
+        playedTrack = randTrackNo;
+        return musicList[0][randTrackNo];
     }
 
     std::string playTrack(std::string trackName){
@@ -89,7 +93,9 @@ public:
     }
 
     void next(){
-       std::cout << Track_t.getNextTrack();
+        std::cout << Track_t.getNextTrack() << std::endl;
+        Track_t.trackTime();
+        Track_t.trackDate();
     }
 
 };
@@ -102,6 +108,7 @@ int main() {
         std::cin >> command;
         if ("play" == command) {
             std::cout << "Input trask name:";
+            std::cin.ignore();
             std::getline(std::cin, trackName) ;
             WinPlayer.play(trackName);
         } else if ("pause" == command){
