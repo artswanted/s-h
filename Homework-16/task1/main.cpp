@@ -4,13 +4,74 @@
 
 class Track {
 private:
+    std::string sTrackName;
+    std::string sTrackDate;
+    std::string sTrackTime;
+public:
+    void setTrackName(std::string name){
+        sTrackName = name;
+    }
+    void setTrackDate(std::string date){
+        sTrackDate = date;
+    }
+    void setTrackTime(std::string time){
+        sTrackTime = time;
+    }
+
+    std::string getTrackName(){
+        return sTrackName;
+    }
+    std::string getTrackDate(){
+        return sTrackDate;
+    }
+    std::string getTrackTime(){
+        return sTrackTime;
+    }
+};
+
+class WinampMediaPlater{
+private:
+    Track Track_t;
+    bool playStatus = false;
+
     std::string musicList[3][5] = {{"Blinding Lights", "The Twist", "Mack the Knife",
-                                     "How Do I Live", "Macarena"},
+                                                                                             "How Do I Live", "Macarena"},
                                    {"29 November 2019", "19 September 1960", "23 July 1970", "19 September 2000", "23 July 1971"},
                                    {"202", "147", "252", "202", "412"}};
     int playedTrack = 0;
     bool trackPause = false;
 public:
+    void play(std::string trackName){
+        if (!playStatus){
+            //std::string result = playTrack(trackName);
+            playTrack(trackName);
+            std::string result = Track_t.getTrackName();
+            std::cout << (result == "null" ? "Wrong track name!" : result + " is playing.\n");
+            if (result != "null"){
+                trackTime();
+                trackDate();
+                playStatus = true;
+            }
+        }
+    }
+
+    void pause (){
+        pauseTrack();
+    }
+
+    void stop(){
+        if (playStatus){
+            std::cout << "Stopped!";
+            playStatus = false;
+        }
+    }
+
+    void next(){
+        std::cout << getNextTrack() << std::endl;
+        trackTime();
+        trackDate();
+    }
+
     std::string getNextTrack()
     {
         std::srand(time(0));
@@ -19,7 +80,7 @@ public:
         return musicList[0][randTrackNo];
     }
 
-    std::string playTrack(std::string trackName){
+    void playTrack(std::string trackName){
         if (!trackPause){
             bool trackFound = false;
             for (int i = 0; i < 5; i++){
@@ -35,25 +96,34 @@ public:
                     }
                     if (trackFound){
                         playedTrack = i;
-                        return soundName;
+                        Track_t.setTrackName(soundName);
+                        Track_t.setTrackDate(musicList[1][playedTrack]);
+                        Track_t.setTrackTime(musicList[2][playedTrack]);
+                        //return soundName;
                     }
                 }
             }
-            return "null";
+            if (!trackFound) {
+                Track_t.setTrackName("null");
+            }
+            //return "null";
         }
         else {
             trackPause = false;
-            return musicList[0][playedTrack];
+            Track_t.setTrackName(musicList[0][playedTrack]);
+            //return musicList[0][playedTrack];
         }
 
     }
 
     void trackDate(){
-        std::cout << musicList[1][playedTrack] << " created date." << std::endl;
+        //std::cout << musicList[1][playedTrack] << " created date." << std::endl;
+        std::cout << Track_t.getTrackDate() << " created date." << std::endl;
     }
 
     void trackTime(){
-        std::cout << musicList[2][playedTrack] << " total track time." << std::endl;
+        //std::cout << musicList[2][playedTrack] << " total track time." << std::endl;
+        std::cout << Track_t.getTrackTime() << " total track time." << std::endl;
     }
 
     void pauseTrack(){
@@ -62,42 +132,6 @@ public:
             std::cout << "Pause!";
         }
     }
-};
-
-class WinampMediaPlater{
-private:
-    Track Track_t;
-    bool playStatus = false;
-public:
-    void play(std::string trackName){
-        if (!playStatus){
-            std::string result = Track_t.playTrack(trackName);
-            std::cout << (result == "null" ? "Wrong track name!" : result + " is playing.\n");
-            if (result != "null"){
-                Track_t.trackTime();
-                Track_t.trackDate();
-                playStatus = true;
-            }
-        }
-    }
-
-    void pause (){
-        Track_t.pauseTrack();
-    }
-
-    void stop(){
-        if (playStatus){
-            std::cout << "Stopped!";
-            playStatus = false;
-        }
-    }
-
-    void next(){
-        std::cout << Track_t.getNextTrack() << std::endl;
-        Track_t.trackTime();
-        Track_t.trackDate();
-    }
-
 };
 
 int main() {
