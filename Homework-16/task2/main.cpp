@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 
-std::vector <class AddressBook> list;
+
 
 class AddressBook
 {
@@ -13,10 +13,12 @@ public:
 
 class Phone
 {
+private:
+    AddressBook newContact;
+    std::vector <class AddressBook> list;
 public:
     void add ()
     {
-        AddressBook newContact;
         std::string buffer;
         std::cout << "Please Enter a name of Person" << std::endl;
         std::cin >> newContact.name;
@@ -30,6 +32,8 @@ public:
         }
         newContact.number = buffer;
         list.push_back(newContact);
+
+        std::cout << "Contact is added." << std::endl;
     };
 
     void call()
