@@ -4,16 +4,16 @@
 
 
 
-class AddressBook
-{
-public:
-    std::string name;
-    std::string number;
-};
 
 class Phone
 {
 private:
+    class AddressBook
+    {
+    public:
+        std::string name;
+        std::string number;
+    };
     AddressBook newContact;
     std::vector <class AddressBook> list;
 public:
