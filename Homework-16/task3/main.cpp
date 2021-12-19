@@ -1,6 +1,6 @@
 #include <iostream>
 
-class Display
+class Window
 {
 public:
     int x;
@@ -9,32 +9,46 @@ public:
     int height;
 };
 
+class Monitor
+{
+private:
+    int monitorSizeX = 80;
+    int monitorSizeY = 50;
+public:
+    int sizeX(){
+        return monitorSizeX;
+    }
 
+    int sizeY(){
+        return monitorSizeY;
+    }
+};
 
 class Command
 {
 private:
-    Display myDisplay;
+    Window myWindow;
+    Monitor myMonitor;
 public:
     void move ()
     {
         int newX, newY;
         std::cout << "Please enter new beginning:" << std::endl;
         std::cin >> newX >> newY;
-        while ((newX + myDisplay.width) > 80 && ((newY + myDisplay.height) > 50))
+        while ((newX + myWindow.width) > myMonitor.sizeX() && ((newY + myWindow.height) > myMonitor.sizeY()))
         {
             std::cout << "Incorrect input, please try again" << std::endl;
             std::cin >> newX >> newY;
         }
-        myDisplay.x = newX;
-        myDisplay.y = newY;
+        myWindow.x = newX;
+        myWindow.y = newY;
     };
     void resize ()
     {
         int newWidth, newHeight;
         std::cout << "Please enter new width and new heught of the window" << std::endl;
         std::cin >> newWidth >> newHeight;
-        while ((myDisplay.x+newWidth) > 80 && (myDisplay.y + newHeight) > 50)
+        while ((myWindow.x+newWidth) > myMonitor.sizeY() && (myWindow.y + newHeight) > myMonitor.sizeY())
         {
             std::cout << "Incorrect input, please try again" << std::endl;
             std::cin >> newWidth >> newHeight;
@@ -46,7 +60,7 @@ public:
         {
             for (int j = 0; j <=80; j++)
             {
-                if (i >= myDisplay.y && i <= (myDisplay.y+myDisplay.height) && j>=myDisplay.x && j<=(myDisplay.x + myDisplay.width)) std::cout << "1";
+                if (i >= myWindow.y && i <= (myWindow.y+myWindow.height) && j>=myWindow.x && j<=(myWindow.x + myWindow.width)) std::cout << "1";
                 else std::cout << "0";
             }
             std::cout << std::endl;
@@ -55,13 +69,14 @@ public:
 };
 
 int main() {
-    Display myDisplay;
+    Window myWindow;
+    Monitor myMonitor;
     std::cout << "Please enter initial parameters of Window" << std::endl;
-    std::cin >> myDisplay.x >> myDisplay.y >> myDisplay.width >> myDisplay.height;
-    while ((myDisplay.x+myDisplay.width) > 80 && (myDisplay.y + myDisplay.height) > 50)
+    std::cin >> myWindow.x >> myWindow.y >> myWindow.width >> myWindow.height;
+    while ((myWindow.x+myWindow.width) > myMonitor.sizeX() && (myWindow.y + myWindow.height) > myMonitor.sizeY())
     {
         std::cout << "Incorrect entry, please try again" << std::endl;
-        std::cin >> myDisplay.x >> myDisplay.y >> myDisplay.width >> myDisplay.height;
+        std::cin >> myWindow.x >> myWindow.y >> myWindow.width >> myWindow.height;
     }
     int answer;
     Command myCommand;
@@ -87,8 +102,8 @@ int main() {
             case 3:
                 break;
             default:
-                std::cout << "! Incorrect command. Try again !";
-                break;
-        }while (true);
-    }
+                std::cout << "! Incorrect command. Try again !\n";
+        }
+    }while (true);
+
 }
