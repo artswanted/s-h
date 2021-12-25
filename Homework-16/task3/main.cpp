@@ -2,11 +2,36 @@
 
 class Window
 {
-public:
+private:
     int x;
     int y;
     int width;
     int height;
+public:
+    int setX(int newX){
+        x = newX;
+    };
+    int getX(){
+        return x;
+    };
+    int setY(int newY){
+        y = newY;
+    };
+    int getY(){
+        return y;
+    };
+    int setWidth(int w){
+        width = w;
+    };
+    int getWidth(){
+        return width;
+    };
+    int setHeight(int h){
+        height = h;
+    };
+    int getHeight(){
+        return height;
+    };
 };
 
 class Monitor
@@ -35,20 +60,20 @@ public:
         int newX, newY;
         std::cout << "Please enter new beginning:" << std::endl;
         std::cin >> newX >> newY;
-        while ((newX + myWindow.width) > myMonitor.sizeX() && ((newY + myWindow.height) > myMonitor.sizeY()))
+        while ((newX + myWindow.getWidth()) > myMonitor.sizeX() && ((newY + myWindow.getHeight()) > myMonitor.sizeY()))
         {
             std::cout << "Incorrect input, please try again" << std::endl;
             std::cin >> newX >> newY;
         }
-        myWindow.x = newX;
-        myWindow.y = newY;
+        myWindow.setX(newX);
+        myWindow.setY(newY);
     };
     void resize ()
     {
         int newWidth, newHeight;
         std::cout << "Please enter new width and new heught of the window" << std::endl;
         std::cin >> newWidth >> newHeight;
-        while ((myWindow.x+newWidth) > myMonitor.sizeY() && (myWindow.y + newHeight) > myMonitor.sizeY())
+        while ((myWindow.getX()+newWidth) > myMonitor.sizeY() && (myWindow.getY() + newHeight) > myMonitor.sizeY())
         {
             std::cout << "Incorrect input, please try again" << std::endl;
             std::cin >> newWidth >> newHeight;
@@ -60,7 +85,7 @@ public:
         {
             for (int j = 0; j <=80; j++)
             {
-                if (i >= myWindow.y && i <= (myWindow.y+myWindow.height) && j>=myWindow.x && j<=(myWindow.x + myWindow.width)) std::cout << "1";
+                if (i >= myWindow.getY() && i <= (myWindow.getY()+myWindow.getHeight()) && j>=myWindow.getX() && j<=(myWindow.getX() + myWindow.getWidth())) std::cout << "1";
                 else std::cout << "0";
             }
             std::cout << std::endl;
@@ -71,12 +96,21 @@ public:
 int main() {
     Window myWindow;
     Monitor myMonitor;
+    int x,y,w,h;
     std::cout << "Please enter initial parameters of Window" << std::endl;
-    std::cin >> myWindow.x >> myWindow.y >> myWindow.width >> myWindow.height;
-    while ((myWindow.x+myWindow.width) > myMonitor.sizeX() && (myWindow.y + myWindow.height) > myMonitor.sizeY())
+    std::cin >> x >> y >> w >> h;
+    myWindow.setX(x);
+    myWindow.setY(y);
+    myWindow.setWidth(w);
+    myWindow.setHeight(h);
+    while ((myWindow.getX()+myWindow.getWidth()) > myMonitor.sizeX() && (myWindow.getY() + myWindow.getHeight()) > myMonitor.sizeY())
     {
         std::cout << "Incorrect entry, please try again" << std::endl;
-        std::cin >> myWindow.x >> myWindow.y >> myWindow.width >> myWindow.height;
+        std::cin >> x >> y >> w >> h;
+        myWindow.setX(x);
+        myWindow.setY(y);
+        myWindow.setWidth(w);
+        myWindow.setHeight(h);
     }
     int answer;
     Command myCommand;

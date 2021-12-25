@@ -14,7 +14,7 @@ public:
 class WinampMediaPlater
 {
 private:
-    std::vector <class Track> list;
+    std::vector <Track> list;
 public:
     bool currentPlay = false;
     std::string buffer = "unknown";

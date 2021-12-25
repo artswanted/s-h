@@ -15,7 +15,7 @@ private:
         std::string number;
     };
     AddressBook newContact;
-    std::vector <class AddressBook> list;
+    std::vector <AddressBook> list;
 public:
     void add ()
     {
