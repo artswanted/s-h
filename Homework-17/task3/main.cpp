@@ -4,13 +4,14 @@
 enum TaskType
 {
     None = 0,
-    A = 1,
-    B = 2,
-    C = 3
+    A,
+    B,
+    C
 };
 
 class People
 {
+private:
     std::string m_name = "unknown";
 public:
     std::string setName (std::string inName)
@@ -26,6 +27,7 @@ public:
 
 class Worker : public People
 {
+private:
     TaskType m_task = None;
 public:
     bool isBusy()
@@ -55,6 +57,7 @@ public:
 
 class Team : public People
 {
+private:
     int m_count = 0;
     std::vector <Worker> workers;
     int m_id = 0;
@@ -106,7 +109,7 @@ public:
 
 class Head : public People
 {
-public:
+private:
     std::vector <Team> teams;
     int m_amount = 0;
 public:
