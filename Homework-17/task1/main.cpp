@@ -3,8 +3,10 @@
 
 class Bigstick
 {
+private:
+    std::vector <std::string> names;
+
   public:
-  std::vector <std::string> names;
 
   void amountGeneration ()
   {
@@ -38,8 +40,10 @@ class Bigstick
 
 class Tree
 {
+private:
+    std::vector <Bigstick> tree;
+
   public:
-  std::vector <class Bigstick> tree;
 
   void amountOfBigSticks ()
   {
@@ -66,9 +70,11 @@ class Tree
 
 class Village
 {
+private:
+    std::vector <class Tree> village;
+
   public:
-  std::vector <class Tree> village;
-  Village () : village(5){}
+    Village () : village(5){}
 
   void settlement()
   {
