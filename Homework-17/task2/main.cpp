@@ -2,9 +2,10 @@
 
 class Core
 {
-public:
+private:
     float x, y;
     std::string color = "unknown";
+public:
 
     void colorChoose()
     {
@@ -31,8 +32,9 @@ public:
 
 class Square : public Core
 {
-public:
+private:
     float distanceToEdge = 0;
+public:
     Square (float m) : distanceToEdge(m)
     {
 
@@ -50,8 +52,9 @@ public:
 
 class Circle : public Core
 {
-public:
+private:
     float radius = 0;
+public:
     Circle (float m) : radius(m)
     {
 
@@ -69,8 +72,9 @@ public:
 
 class Triangle : public Core
 {
-public:
+private:
     float distanceToApex;
+public:
     Triangle (float m) : distanceToApex (m)
     {
 
@@ -89,6 +93,7 @@ public:
 
 class Rectangle : public Core
 {
+private:
     float shortDistance, longDistance;
 public:
     Rectangle (float m, float n) : shortDistance(m), longDistance (n)
