@@ -28,21 +28,19 @@ void createOrder()
 }
 
 int main() {
-    std::srand (std::time (0));
-    for (int i = 0; i < 10; i++)
-    {
+    std::srand(std::time(0));
+    for (int i = 0; i < 10; i++) {
         orders.emplace_back(createOrder);
         orders[i].detach();
     }
     int k = 0;
-    while (k < 9)
-    {
+    while (k < 9) {
         std::this_thread::sleep_for(std::chrono::seconds(30));
         std::cout << "Courier is come \n" << "He will pick-up:" << std::endl;
-        for (int i = 0; i < available.size();i++)
-        {
+        for (int i = 0; i < available.size(); i++) {
             std::cout << available[i] << std::endl;
         }
         k += available.size();
         available.clear();
     }
+}
