@@ -5,23 +5,22 @@
 #pragma comment(lib, "winmm.lib")
 
 int main() {
-    std::cout << "Input time: ";
     std::tm time;
-    std::cin >> std::get_time(&time, "%M:%S");
+    time.tm_min = 9999;
     std::time_t t = std::time(nullptr) + time.tm_min * 60 + time.tm_sec;
 
     std::time_t delta = t - std::time(nullptr);
-    int temp_data = delta % 60;
+    int temp_data = delta % 120;
 
     while (true)
     {
         delta = t - std::time(nullptr);
         if (delta <= 0) break;
 
-        if (temp_data != delta % 60) {
+        if (temp_data != delta % 120) {
             system("CLS");
-            std::cout << delta / 60 << ":" << delta % 60 << std::endl;
-            temp_data = delta % 60;
+            std::cout << delta / 120 << ":" << delta % 120 << std::endl;
+            temp_data = delta % 120;
         }
         
         
