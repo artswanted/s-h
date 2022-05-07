@@ -35,6 +35,7 @@ int main() {
     }
     int k = 0;
     while (k < 9) {
+        order_available.lock();
         std::this_thread::sleep_for(std::chrono::seconds(30));
         std::cout << "Courier is come \n" << "He will pick-up:" << std::endl;
         for (int i = 0; i < available.size(); i++) {
@@ -42,5 +43,6 @@ int main() {
         }
         k += available.size();
         available.clear();
+        kitchen_available.unlock();
     }
 }

@@ -48,6 +48,8 @@ int main()
     }
 
     for (int i = 0; i < n; ++i) {
+        results_mtx.lock();
         std::cout << i << ". " << results[i] << std::endl;
+        results_mtx.unlock();
     }
 }
