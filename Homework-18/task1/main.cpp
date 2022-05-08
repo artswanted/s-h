@@ -9,16 +9,20 @@ std::mutex results_mtx;
 
 void swim(const std::string& name, double speed)
 {
+    results_mtx.lock();
     std::cout << name << " started to swim...";
+    results_mtx.unlock();
     double distance = 0;
     while (distance <= 100)
     {
         std::this_thread::sleep_for(std::chrono::seconds(1));
+        results_mtx.lock();
         std::cout << name << " swam: " << distance << std::endl;
+        results_mtx.unlock();
         distance += speed;
     }
-    std::cout << name << " finished." << std::endl;
     results_mtx.lock();
+    std::cout << name << " finished." << std::endl;
     results.push_back(name);
     results_mtx.unlock();
 }
@@ -48,8 +52,6 @@ int main()
     }
 
     for (int i = 0; i < n; ++i) {
-        results_mtx.lock();
         std::cout << i << ". " << results[i] << std::endl;
-        results_mtx.unlock();
     }
 }

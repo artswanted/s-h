@@ -12,14 +12,15 @@ std::vector <std::thread> orders;
 std::vector <std::string> available;
 std::mutex kitchen_available;
 std::mutex order_available;
+std::mutex cout_available;
 
 void createOrder()
 {
-    order_available.lock();
+    kitchen_available.lock();
     std::this_thread::sleep_for(std::chrono::seconds(std::rand() % 5 + 5));
     std::string order = menu[std::rand() % 3];
     std::cout << "Your want order " << order << std::endl;
-    order_available.unlock();
+    kitchen_available.unlock();
     kitchen_available.lock();
     std::this_thread::sleep_for(std::chrono::seconds(std::rand() % 10 + 5));
     std::cout << order << " is ready!" << std::endl;
@@ -35,7 +36,7 @@ int main() {
     }
     int k = 0;
     while (k < 9) {
-        order_available.lock();
+        cout_available.lock();
         std::this_thread::sleep_for(std::chrono::seconds(30));
         std::cout << "Courier is come \n" << "He will pick-up:" << std::endl;
         for (int i = 0; i < available.size(); i++) {
@@ -43,6 +44,6 @@ int main() {
         }
         k += available.size();
         available.clear();
-        kitchen_available.unlock();
+        cout_available.unlock();
     }
 }
