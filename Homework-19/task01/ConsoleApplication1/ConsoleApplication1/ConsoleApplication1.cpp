@@ -4,30 +4,38 @@
 class Animal
 {
 public:
-    virtual void voice() = 0;
+    virtual std::string voice() = 0;
 };
 
 class Dog : public Animal
 {
 public:
-    virtual void voice()
+    virtual std::string voice()
     {
-        std::string voice = "Bark";
+        return "Bark";
     }
 };
 
 class Cat : public Animal
 {
 public:
-    virtual void voice()
+    virtual std::string voice()
     {
-        std::string voice = "Bark";
+        return "Meow";
     }
 };
 
 void meeting(Animal* a, Animal* b)
 {
-    if (a->voice() == "Bark")
+    std::string answer = a->voice() + b->voice();
+    if (answer == "BarkBark")
+        std::cout << "Woof-Woof" << std::endl;
+    else if (answer == "BarkMeow")
+        std::cout << "Bark Meow" << std::endl;
+    else if (answer == "MeowBark")
+        std::cout << "Meow Bark" << std::endl;
+    else if (answer == "MeowMeow")
+        std::cout << "Purr Purr" << std::endl;
 }
 
 
