@@ -2,114 +2,110 @@
 #include <string>
 #include <vector>
 
-enum list_t {
-    SWIM = 0,
-    DANCE,
-    COUNT
+using namespace std;
+
+class Talents {
+public:
+    virtual void show_talent() = 0;
+    virtual ~Talents() = default;
 };
 
-class Talante
-{
+class Dog {
+private:
+    std::string name = "Pet";
+    std::vector<Talents*> abilities;
+
 public:
-    virtual void isTalante() = 0;
+    explicit Dog(const std::string& name);
+    virtual ~Dog();
+
+    void clearAbilities();
+    bool addAbility(Talents* ability);
+    void show_talent();
 };
 
-class Swimming : virtual public Talante
-{
+class Dancing : virtual public Talents {
 public:
-    virtual void isTalante() {
-        std::cout << "It can swim." << std::endl;
-    }
+    void show_talent() override;
 };
 
-class Dancing : virtual public Talante
-{
+class Counting : virtual public Talents {
 public:
-    virtual void isTalante() {
-        std::cout << "It can dance." << std::endl;
-    }
+    void show_talent() override;
 };
 
-class Counting : virtual public Talante
-{
+Dog::Dog(const std::string& name) {
+    this->name = name;
+}
+
+class Swimming : virtual public Talents {
 public:
-    virtual void isTalante() {
-        std::cout << "It can count." << std::endl;
-    }
+    void show_talent() override;
 };
 
-class Dog
-{
-public:
-    Dog(std::string _name, bool swim, bool dance, bool count)
+
+void Dog::clearAbilities() {
+    if (!abilities.empty())
     {
-        name = _name;
-    }
-    void dogName() {
-        std::cout << name;
-    }
-    std::string getName() {
-        return name;
-    }
-    void talanteList(int iType, bool bTalant)
-    {
-        if (iType == SWIM) swim = bTalant;
-        else if (iType == DANCE) dance = bTalant;
-        else if (iType == COUNT) count = bTalant;     
-    }
-
-    void show_talantes() {
-        Talante* s = new Swimming();
-        Talante* d = new Dancing();
-        Talante* c = new Counting();
-
-        std::cout << swim << dance << count;
-
-        if (swim) {
-            s->isTalante();
+        for (auto talent : abilities) {
+            delete talent;
         }
-        if (dance) {
-            d->isTalante();
-        }
-        if (count) {
-            c->isTalante();
+        abilities.clear();
+    }
+}
+
+bool Dog::addAbility(Talents* ability) {
+    if (ability != nullptr) {
+        abilities.push_back(ability);
+        return true;
+    }
+    return false;
+}
+
+void Dog::show_talent() {
+    std::cout << "This dog has name: " << name << " and it has a some talents:\n";
+    if (abilities.empty()) {
+        std::cout << "Sorry, your dog is stupid";
+    }
+    else {
+        for (auto& ability : abilities) {
+            ability->show_talent();
         }
     }
-protected:
-    std::string name;
-    bool swim;
-    bool dance;
-    bool count;
-};
+}
+
+Dog::~Dog() {
+    clearAbilities();
+    std::cout << "Doggy died" << std::endl;
+}
+
+void Dancing::show_talent() {
+    std::cout << "It can dance" << std::endl;
+}
+
+void Counting::show_talent() {
+    std::cout << "It can count" << std::endl;
+}
+
+void Swimming::show_talent() {
+    std::cout << "It can swim" << std::endl;
+}
 
 int main() {
-    std::vector<class Dog> dogs;
-    Dog dog1("Steve", false, false, false);
-    dogs.push_back(dog1);
-    Dog dog2("Robert", false, false, false);
-    dogs.push_back(dog2);
+    Dog dog("Doggy");
 
-    for (int i = 0; i < dogs.size(); i++)
-    {
-        int answer;
-        std::cout << dogs[i].getName() << " is can swim?" << std::endl;
-        std::cout << "Write 0 for No or 1 for Yes" << std::endl;
-        std::cin >> answer;
-        dogs[i].talanteList(0, (bool)answer);
-        std::cout << dogs[i].getName() << " is can dance?" << std::endl;
-        std::cout << "Write 0 for No or 1 for Yes" << std::endl;
-        std::cin >> answer;
-        dogs[i].talanteList(1, (bool)answer);
-        std::cout << dogs[i].getName() << " is can count?" << std::endl;
-        std::cout << "Write 0 for No or 1 for Yes" << std::endl;
-        std::cin >> answer;
-        dogs[i].talanteList(2, (bool)answer);
-        std::cout << "IM HERE\n";
-    }
+    dog.addAbility(new Swimming());
+    dog.addAbility(new Dancing());
+    dog.show_talent();
 
-    for (int p = 0; p < dogs.size(); p++) {
-        std::cout << "This is " << dogs[p].getName() << " and it has some talents:" << std::endl;
-        dogs[p].show_talantes();
-    }
-    return 0;
+    cout << endl;
+    dog.clearAbilities();
+    dog.show_talent();
+    cout << endl;
+
+    cout << endl;
+    dog.addAbility(new Counting());
+    dog.addAbility(new Swimming());
+    dog.show_talent();
+    cout << endl;
 }
