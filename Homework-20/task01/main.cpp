@@ -26,19 +26,19 @@ int main() {
         }break;
         case 2:
         {
-
+            cpr_post();
         }break;
         case 3:
         {
-
+            cpr_put();
         }break;
         case 4:
         {
-
+            cpr_del();
         }break;
         case 5:
         {
-
+            cpr_patch();
         }break;
         case 6:
         {
