@@ -1,53 +1,31 @@
 #include <iostream>
 #include <cpr/cpr.h>
-#include "cpr_get.h"
-#include "cpr_put.h"
-#include "cpr_patch.h"
-#include "cpr_del.h"
-#include "gpr_post.h"
-
-int iUserChoice (){
-    int choice;
-    std::cout << "Make your choice\n1.Get\n2.Post\n3.Put\n4.Delete\n5.Patch\n6.Exit" << std::endl;
-    std::cin >> choice;
-    do {
-        if(choice >= 1 && choice<=6){
-            return choice;
-        }
-    }while(true);
-}
 
 int main() {
-    int choice = iUserChoice();
-    switch (choice) {
-        case 1:
-        {
-            cpr_get();
-        }break;
-        case 2:
-        {
-            cpr_post();
-        }break;
-        case 3:
-        {
-            cpr_put();
-        }break;
-        case 4:
-        {
-            cpr_del();
-        }break;
-        case 5:
-        {
-            cpr_patch();
-        }break;
-        case 6:
-        {
-            //
-        }break;
-        default:
-        {
-            //
-        }break;
+    std::string url = "https://httpbin.org/";
+
+    std::string command;
+    while (command != "exit") {
+        std::cout << "Enter a command (get, post, put, delete, patch): ";
+        std::cin >> command;
+
+        if (command == "get") {
+            cpr::Response r = cpr::Get(cpr::Url{url + "get"});
+            std::cout << r.text << std::endl;
+        } else if (command == "post") {
+            cpr::Response r = cpr::Post(cpr::Url{url + "post"}, cpr::Payload{{"key", "value"}});
+            std::cout << r.text << std::endl;
+        } else if (command == "put") {
+            cpr::Response r = cpr::Put(cpr::Url{url + "put"}, cpr::Payload{{"key", "value"}});
+            std::cout << r.text << std::endl;
+        } else if (command == "delete") {
+            cpr::Response r = cpr::Delete(cpr::Url{url + "delete"});
+            std::cout << r.text << std::endl;
+        } else if (command == "patch") {
+            cpr::Response r = cpr::Patch(cpr::Url{url + "patch"}, cpr::Payload{{"key", "value"}});
+            std::cout << r.text << std::endl;
+        }
     }
+
     return 0;
 }

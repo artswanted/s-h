@@ -12,5 +12,5 @@ include(FetchContent)
 FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git GIT_TAG 0817715923c9705e68994eb52ef9df3f6845beba)
 FetchContent_MakeAvailable(cpr)
 
-add_executable(task01 main.cpp main.h cpr_get.cpp cpr_get.h gpr_post.cpp gpr_post.h cpr_put.cpp cpr_put.h cpr_del.cpp cpr_del.h cpr_patch.cpp cpr_patch.h)
+add_executable(task01 main.cpp)
 target_link_libraries(task01 PRIVATE cpr::cpr)
