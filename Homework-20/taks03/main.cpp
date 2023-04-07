@@ -10,11 +10,11 @@ int main() {
 
     // ввод аргументов
     while (key != "post" && key != "get") {
-        std::cout << "Введите название аргумента: ";
+        std::cout << "Enter the name of the argument: ";
         std::getline(std::cin, key);
 
         if (key != "post" && key != "get") {
-            std::cout << "Введите значение аргумента: ";
+            std::cout << "Enter an argument value: ";
             std::getline(std::cin, value);
             args[key] = value;
         }
@@ -29,10 +29,11 @@ int main() {
     // создание запроса
     cpr::Response response;
     if (method == "POST") {
-        cpr::Payload payload;
+        std::vector<cpr::Pair> data;
         for (const auto& arg : args) {
-            payload.AddParameter({arg.first, arg.second});
+            data.push_back(cpr::Pair(arg.first, arg.second));
         }
+        cpr::Payload payload(data.begin(), data.end());
         response = cpr::Post(cpr::Url{"https://httpbin.org/post"}, payload);
     } else if (method == "GET") {
         std::string url = "https://httpbin.org/get";
